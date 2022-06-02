@@ -12,15 +12,6 @@
 
 #include "../includes/philosophers.h"
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s)
-	{
-		while (*s)
-			write(fd, s++, 1);
-	}
-}
-
 int		ft_atoi(const char *str)
 {
 	int nb;
@@ -40,3 +31,22 @@ int		ft_atoi(const char *str)
 		nb = (nb * 10) + ((*str++) - '0');
 	return (nb * sign);
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s)
+	{
+		while (*s)
+			write(fd, s++, 1);
+	}
+}
+
+long long	timestamp(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000LL) + (t.tv_usec / 1000));
+}
+
+//void	ft_sleep()

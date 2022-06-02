@@ -12,26 +12,32 @@
 
 #include "../includes/philosophers.h"
 
-void *func()
+void *func(void *philo_void)
 {
-	printf("basic function to test\n");
+	t_philo *philo;
+
+	philo = (t_philo *)philo_void;
+	while (!philo->full && !philo->dead)
+	{
+		eat(philo);
+	}
 	return (NULL);
 }
 
-void	philo_thread(t_param param, pthread_t *philos)
+void	philo_thread(t_param *param, pthread_t *philos)
 {
 	int	i;
 
 	i = 0;
-	while (i < param.num_philo)
+	while (i < param->num_philo)
 	{
-		pthread_create(&philos[i], NULL, func, NULL);
+		pthread_create(&philos[i], NULL, func, &(param->philo[i]));
 		i = i + 2;
 	}
 	i = 1;	
-	while (i < param.num_philo)
+	while (i < param->num_philo)
 	{
-		pthread_create(&philos[i], NULL, func, NULL);
+		pthread_create(&philos[i], NULL, func, &(param->philo[i]));
 		i = i + 2;
 	}
 }
@@ -44,10 +50,8 @@ int	init_philo(t_param *param)
 	philos = malloc(sizeof(pthread_t) * param->num_philo);
 	if (!philos)
 		return (-1);
-	param->p = malloc(sizeof(pthread_t) * param->num_philo);
-	if (!param->p)
-		return (-1);
-	philo_thread(*param, philos);
+	philos_setup(param);
+	philo_thread(param, philos);
 	i = 0;
     while (i < param->num_philo)
     {

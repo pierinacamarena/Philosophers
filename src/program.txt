@@ -1,4 +1,0 @@
-ok lets write what it should produce 
-
-if i put 1 philo 
-it should give me an error 

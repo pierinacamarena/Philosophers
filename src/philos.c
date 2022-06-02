@@ -17,21 +17,25 @@ void    philos_setup(t_param *param)
     int i;
 
     i = 0;
+    param->philo = malloc(sizeof(t_philo) * param->num_philo);
+	if (!param->philo)
+		return;
     while (i < param->num_philo)
     {
-        param->p[i].id = i + 1;
-        param->p[i].time_init = actual_time();
-        param->p[i].time_teat = param->t_eat;
-        param->p[i].time_tosleep = param->t_sleep;
-        param->p[i].time_todie = param->t_die;
-        param->p[i].status = 0;
-        param->p[i].full = 0;
-        param->p[i].meal_count = 0;
-        param->p[i].left_f = &param->forks[i];
+        param->philo[i].id = i + 1; 
+        param->philo[i].time_init = timestamp();
+        param->philo[i].time_toeat = param->t_eat;
+        param->philo[i].time_tosleep = param->t_sleep;
+        param->philo[i].time_todie = param->t_die;
+        param->philo[i].status = 0;
+        param->philo[i].full = 0;
+        param->philo[i].meal_count = 0;
+        param->philo[i].dead = 0;
+        param->philo[i].left_f = &param->forks[i];
         if (i < param->num_philo - 1)
-            param->p[i].right_f = &param->forks[i + 1];
+            param->philo[i].right_f = &param->forks[i + 1];
         else
-            param->p[i].right_f = &param->forks[0];
+            param->philo[i].right_f = &param->forks[0];
         i++;
     }
 }

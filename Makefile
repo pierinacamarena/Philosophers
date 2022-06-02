@@ -1,5 +1,5 @@
 NAME = philo
-CC = gcc
+CC = gcc -g
 FLAGS = -Wall -Werror -Wextra
 THREADS = -pthread
 HEADER = includes
@@ -9,6 +9,8 @@ SOURCES =	main.c \
 			error.c \
 			utils.c \
 			parsing.c \
+			philos.c \
+			activities.c \
 
 SRCS = $(addprefix $(SRC)/, $(SOURCES))
 OBJS = $(addprefix $(OBJ)/, $(SOURCES:.c=.o))
