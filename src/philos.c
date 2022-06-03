@@ -22,7 +22,7 @@ void    philos_setup(t_param *param)
 		return;
     while (i < param->num_philo)
     {
-        param->philo[i].id = i + 1; 
+        param->philo[i].id = i + 1;
         param->philo[i].time_init = timestamp();
         param->philo[i].time_toeat = param->t_eat;
         param->philo[i].time_tosleep = param->t_sleep;
@@ -38,4 +38,41 @@ void    philos_setup(t_param *param)
             param->philo[i].right_f = &param->forks[0];
         i++;
     }
+}
+
+void	philo_thread(t_param *param, pthread_t *philos)
+{
+	int	i;
+
+	i = 0;
+	while (i < param->num_philo)
+	{
+		pthread_create(&philos[i], NULL, func, &(param->philo[i]));
+		i = i + 2;
+	}
+	i = 1;	
+	while (i < param->num_philo)
+	{
+		pthread_create(&philos[i], NULL, func, &(param->philo[i]));
+		i = i + 2;
+	}
+}
+
+int	init_philo(t_param *param)
+{
+	int i;
+	pthread_t *philos;
+
+	philos = malloc(sizeof(pthread_t) * param->num_philo);
+	if (!philos)
+		return (-1);
+	philos_setup(param);
+	philo_thread(param, philos);
+	i = 0;
+    while (i < param->num_philo)
+    {
+        pthread_join(philos[i], NULL);
+		i++;
+    }
+	return (0);
 }

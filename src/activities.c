@@ -44,13 +44,11 @@ void    eat(t_philo *philo)
 	    printf("%lldms philo %d has taken a left fork\n", timestamp() - philo->time_init, philo->id);
     }
     printf("%lldms philo %d is eating\n", timestamp() - philo->time_init, philo->id);
+    philo->meal_count++;
     usleep(philo->time_toeat);
     pthread_mutex_unlock(&(philo->left_f->fork));
     printf("%lldms philo %d has dropped a left fork\n", timestamp() - philo->time_init, philo->id);
     pthread_mutex_unlock(&(philo->right_f->fork));
     printf("%lldms philo %d has dropped a right fork\n", timestamp() - philo->time_init, philo->id);
-    printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
-    usleep(philo->time_tosleep);
-    printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
     philo->full = 1;
 }

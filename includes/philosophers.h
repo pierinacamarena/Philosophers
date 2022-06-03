@@ -52,14 +52,22 @@ typedef struct     s_param
     t_philo *philo;
 }               t_param;
 
-int		    ft_atoi(const char *str);
-int         arg_parsing(int ac, char **av, t_param *param);
-void	    error_arg(void);
-void 	    error_parsing(void);
-void        philos_setup(t_param *param);
-void        eat(t_philo *philo);
-void	    ft_putstr_fd(char *s, int fd);
-long long	timestamp(void);
+/*activities*/
+void    eat(t_philo *philo);
+/*error*/
+void    error_arg(void);
+void    error_parsing(void);
+/*main*/
+void    *func(void *philo_void);
+/*parsing*/
+int     arg_parsing(int ac, char **av, t_param *param);
+/*philos*/
+int     init_philo(t_param *param);
+void    philos_setup(t_param *param);
+/*utils*/
+int     ft_atoi(const char *str);
+void    ft_putstr_fd(char *s, int fd);
+long long   timestamp(void);
 
 
 #endif

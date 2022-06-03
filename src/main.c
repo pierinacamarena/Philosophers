@@ -21,51 +21,24 @@ void *func(void *philo_void)
 	{
 		eat(philo);
 	}
+	if (!philo->dead)
+	{
+		printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
+    	usleep(philo->time_tosleep);
+    	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
+	}
 	return (NULL);
-}
-
-void	philo_thread(t_param *param, pthread_t *philos)
-{
-	int	i;
-
-	i = 0;
-	while (i < param->num_philo)
-	{
-		pthread_create(&philos[i], NULL, func, &(param->philo[i]));
-		i = i + 2;
-	}
-	i = 1;	
-	while (i < param->num_philo)
-	{
-		pthread_create(&philos[i], NULL, func, &(param->philo[i]));
-		i = i + 2;
-	}
-}
-
-int	init_philo(t_param *param)
-{
-	int i;
-	pthread_t *philos;
-
-	philos = malloc(sizeof(pthread_t) * param->num_philo);
-	if (!philos)
-		return (-1);
-	philos_setup(param);
-	philo_thread(param, philos);
-	i = 0;
-    while (i < param->num_philo)
-    {
-        pthread_join(philos[i], NULL);
-		i++;
-    }
-	return (0);
 }
 
 int	main(int ac, char **av)
 {
+	int	i;
 	int	error;
 	t_param param;
-	
+	int	num_philos_ate;
+
+	i = 0;
+	num_philos_ate = 0;
 	if (ac < 5 || ac > 6)
 	{
 		error_arg();
@@ -78,5 +51,13 @@ int	main(int ac, char **av)
 		exit (1);
 	}
 	init_philo(&param);
+	while (i < param.num_philo)
+	{
+		num_philos_ate = num_philos_ate + param.philo[i].meal_count;
+		i++;
+	}
+	printf("-----------------------------------------------------------------\n");
+	printf("NUMBER OF PHILO THAT ATE ARE %d\n", num_philos_ate);
+	printf("-----------------------------------------------------------------\n");
 	return (0);
 }
