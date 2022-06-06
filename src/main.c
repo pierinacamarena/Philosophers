@@ -15,17 +15,17 @@
 void *func(void *philo_void)
 {
 	t_philo *philo;
+	int		i;
 
+	i = 0;
 	philo = (t_philo *)philo_void;
-	while (!philo->full && !philo->dead)
+	while (!philo->full && !philo->dead && i < 5)
 	{
 		eat(philo);
-	}
-	if (!philo->dead)
-	{
 		printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
     	usleep(philo->time_tosleep);
     	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
+		i++;
 	}
 	return (NULL);
 }

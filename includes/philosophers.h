@@ -33,6 +33,7 @@ typedef struct  s_philo
     int         time_toeat;
     int         time_tosleep;
     int         time_todie;
+    int         total_eat;
     int         status;
     int         full;
     int         meal_count;

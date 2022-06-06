@@ -31,6 +31,7 @@ void    philos_setup(t_param *param)
         param->philo[i].full = 0;
         param->philo[i].meal_count = 0;
         param->philo[i].dead = 0;
+        param->philo[i].total_eat = param->num_eat;
         param->philo[i].left_f = &param->forks[i];
         if (i < param->num_philo - 1)
             param->philo[i].right_f = &param->forks[i + 1];
