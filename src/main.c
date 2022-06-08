@@ -19,13 +19,27 @@ void *func(void *philo_void)
 
 	i = 0;
 	philo = (t_philo *)philo_void;
-	while (!philo->full && !philo->dead && i < 5)
+	if (philo->total_eat == 0)
 	{
-		eat(philo);
-		printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
-    	usleep(philo->time_tosleep);
-    	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
-		i++;
+		while (!philo->full && !philo->dead)
+		{
+			eat(philo);
+			printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
+	  	  	usleep(philo->time_tosleep);
+	    	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
+			i++;
+		}
+	}
+	else if (philo->total_eat > 0)
+	{
+		while (!philo->full && !philo->dead && i < philo->total_eat)
+		{
+			eat(philo);
+			printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
+    		usleep(philo->time_tosleep);
+    		printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
+			i++;
+		}
 	}
 	return (NULL);
 }

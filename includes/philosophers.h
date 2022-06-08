@@ -51,6 +51,8 @@ typedef struct     s_param
     int     num_eat;
     t_fork  *forks;
     t_philo *philo;
+    pthread_mutex_t	printing;
+    pthread_mutex_t meal_check;
 }               t_param;
 
 /*activities*/

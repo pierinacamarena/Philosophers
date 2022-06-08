@@ -12,6 +12,14 @@
 
 #include "../includes/philosophers.h"
 
+static int  mutexes_init(t_param *param)
+{
+    if (pthread_mutex_init(&(param->printing), NULL))
+		return (1);
+	if (pthread_mutex_init(&(param->meal_check), NULL))
+		return (1);
+    return (0);
+}
 static  t_fork  *create_fork(int n)
 {
     t_fork *tmp;
@@ -55,5 +63,7 @@ int arg_parsing(int ac, char **av, t_param *param)
     }
     else
         param->num_eat = 0;
+    if (mutexes_init(param))
+        return (1);
     return (0);
 }
