@@ -12,7 +12,7 @@
 
 #include "../includes/philosophers.h"
 
-void    checker(t_param *param, t_philo *ph)
+void    checker(t_param *param)
 {
     int i;
 
@@ -23,10 +23,17 @@ void    checker(t_param *param, t_philo *ph)
         {
             if (param->num_eat > 0)
             {
-                if (ph->meal_count == param->num_eat)
-                    ph->full = 1;
+                if (param->philo[i].meal_count == param->num_eat)
+                    param->philo[i].full = 1;
             }
-            
+            pthread_mutex_lock(&param->meal_check);
+            if (timestamp() - param->philo[i].l_meal > param->philo[i].time_todie)
+            {
+                printf("%lldms philo %d die\n", timestamp() - param->philo[i].time_init, param->philo[i].id);
+                param->philo[i].dead = 1;
+            }
+            pthread_mutex_unlock(&param->meal_check);
+            i++;
         }
     }
 }

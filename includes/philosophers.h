@@ -55,22 +55,29 @@ typedef struct     s_param
     pthread_mutex_t meal_check;
 }               t_param;
 
-/*activities*/
+/* activities */
 void    eat(t_philo *philo);
-/*error*/
+
+/* error */
 void    error_arg(void);
 void    error_parsing(void);
-/*main*/
+
+/* main */
 void    *func(void *philo_void);
-/*parsing*/
+
+/* parsing */
 int     arg_parsing(int ac, char **av, t_param *param);
-/*philos*/
+
+/* philos */
 int     init_philo(t_param *param);
 void    philos_setup(t_param *param);
-/*utils*/
+
+/* utils */
 int     ft_atoi(const char *str);
 void    ft_putstr_fd(char *s, int fd);
 long long   timestamp(void);
 
+/* checker */
+void    checker(t_param *param);
 
 #endif

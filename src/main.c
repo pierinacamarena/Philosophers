@@ -46,13 +46,13 @@ void *func(void *philo_void)
 
 int	main(int ac, char **av)
 {
-	int	i;
+	//int	i;
 	int	error;
 	t_param param;
-	int	num_philos_ate;
+	//int	num_philos_ate;
 
-	i = 0;
-	num_philos_ate = 0;
+	//i = 0;
+	//num_philos_ate = 0;
 	if (ac < 5 || ac > 6)
 	{
 		error_arg();
@@ -65,13 +65,6 @@ int	main(int ac, char **av)
 		exit (1);
 	}
 	init_philo(&param);
-	while (i < param.num_philo)
-	{
-		num_philos_ate = num_philos_ate + param.philo[i].meal_count;
-		i++;
-	}
-	printf("-----------------------------------------------------------------\n");
-	printf("NUMBER OF PHILO THAT ATE ARE %d\n", num_philos_ate);
-	printf("-----------------------------------------------------------------\n");
+	checker(&param);
 	return (0);
 }

@@ -44,6 +44,7 @@ void    eat(t_philo *philo)
 	    printf("%lldms philo %d has taken a left fork\n", timestamp() - philo->time_init, philo->id);
     }
     printf("%lldms philo %d is eating\n", timestamp() - philo->time_init, philo->id);
+    philo->l_meal = timestamp();
     philo->meal_count++;
     printf("%lldms meal count of philo %d is %d\n", timestamp() - philo->time_init, philo->id, philo->meal_count);
     usleep(philo->time_toeat);

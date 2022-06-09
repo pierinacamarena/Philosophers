@@ -57,5 +57,4 @@ void	*death_is_near(void *tmp)
 	}
 	return (NULL);
 }
-
 */
