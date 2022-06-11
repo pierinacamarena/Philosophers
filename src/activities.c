@@ -46,6 +46,8 @@ void    eat(t_philo *philo)
     printf("%lldms philo %d is eating\n", timestamp() - philo->time_init, philo->id);
     philo->l_meal = timestamp();
     philo->meal_count++;
+    if (philo->meal_count == philo->total_eat)
+        philo->full = 1;
     printf("%lldms meal count of philo %d is %d\n", timestamp() - philo->time_init, philo->id, philo->meal_count);
     usleep(philo->time_toeat);
     pthread_mutex_unlock(&(philo->left_f->fork));

@@ -69,6 +69,12 @@ int	init_philo(t_param *param)
 		return (-1);
 	philos_setup(param);
 	philo_thread(param, philos);
+    /*if (param->num_eat > 0)
+    {
+        printf("+++++++++++++++\n");
+        printf("entering the checker\n");
+        checker(param, );
+    }*/
 	i = 0;
     while (i < param->num_philo)
     {
