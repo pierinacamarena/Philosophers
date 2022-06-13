@@ -1,0 +1,143 @@
+philo 1's full value is 0
+philo 1's full value is 0
+entered the eating function
+philo 2's full value is 0
+philo 2's full value is 0
+philo 3's full value is 0
+philo 3's full value is 0
+0ms philo 1 is sleeping
+0ms philo 1 is thinking
+philo 1's full value is 0
+entered the eating function
+1ms philo 2 is sleeping
+entered the eating function
+1ms philo 2 is thinking
+philo 2's full value is 0
+1ms philo 1 is sleeping
+1ms philo 1 is thinking
+philo 1's full value is 0
+entered the eating function
+1ms philo 2 is sleeping
+entered the eating function
+1ms philo 2 is thinking
+philo 2's full value is 0
+1ms philo 1 is sleeping
+1ms philo 1 is thinking
+philo 1's full value is 0
+entered the eating function
+1ms philo 2 is sleeping
+1ms philo 2 is thinking
+philo 2's full value is 0
+entered the eating function
+entered the eating function
+3ms philo 3 is sleeping
+3ms philo 1 is sleeping
+3ms philo 3 is thinking
+philo 3's full value is 0
+entered the eating function
+3ms philo 1 is thinking
+philo 1's full value is 0
+3ms philo 2 is sleeping
+entered the eating function
+3ms philo 2 is thinking
+philo 2's full value is 0
+3ms philo 3 is sleeping
+entered the eating function
+++++++++++++++++++-------------------------+++++++++++++++++++
+for philo 1 the mealcount is 5
+inside checker, entering to modify the value of philo->full
+modifying philo 1
+inside checker new value of full is 1
+value of all ate is 1
+++++++++++++++++++-------------------------+++++++++++++++++++
+4ms philo 1 is sleeping
+4ms philo 3 is thinking
+philo 3's full value is 0
+entered the eating function
+4ms philo 2 is sleeping
+4ms philo 1 is thinking
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+philo 1's full value is 1
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+4ms philo 2 is thinking
+philo 2's full value is 0
+++++++++++++++++++-------------------------+++++++++++++++++++
+for philo 1 the mealcount is 5
+inside checker, entering to modify the value of philo->full
+modifying philo 1
+inside checker new value of full is 1
+value of all ate is 2
+++++++++++++++++++-------------------------+++++++++++++++++++
+entered the eating function
+4ms philo 3 is sleeping
+entered the eating function
+++++++++++++++++++-------------------------+++++++++++++++++++
+for philo 1 the mealcount is 5
+inside checker, entering to modify the value of philo->full
+modifying philo 1
+inside checker new value of full is 1
+value of all ate is 3
+++++++++++++++++++-------------------------+++++++++++++++++++
+4ms philo 2 is sleeping
+4ms philo 3 is thinking
+philo 3's full value is 0
+++++++++++++++++++-------------------------+++++++++++++++++++
+for philo 1 the mealcount is 5
+inside checker, entering to modify the value of philo->full
+modifying philo 1
+inside checker new value of full is 1
+value of all ate is 4
+++++++++++++++++++-------------------------+++++++++++++++++++
+4ms philo 2 is thinking
+philo 2's full value is 0
+entered the eating function
+++++++++++++++++++-------------------------+++++++++++++++++++
+for philo 1 the mealcount is 5
+inside checker, entering to modify the value of philo->full
+modifying philo 1
+inside checker new value of full is 1
+value of all ate is 5
+++++++++++++++++++-------------------------+++++++++++++++++++
+##########################
+all_ate is 5
+all philos ate
+##########################
+4ms philo 3 is sleeping
+entered the eating function
+4ms philo 2 is sleeping
+4ms philo 3 is thinking
+philo 3's full value is 0
+4ms philo 2 is thinking
+philo 2's full value is 0
+entered the eating function
+4ms philo 3 is sleeping
+entered the eating function
+4ms philo 2 is sleeping
+4ms philo 3 is thinking
+philo 3's full value is 0
+4ms philo 2 is thinking
+philo 2's full value is 0
+entered the eating function
+4ms philo 3 is sleeping
+entered the eating function
+4ms philo 2 is sleeping
+4ms philo 3 is thinking
+philo 3's full value is 0
+4ms philo 2 is thinking
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+philo 2's full value is 0
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+entered the eating function
+5ms philo 3 is sleeping
+5ms philo 3 is thinking
+philo 3's full value is 0
+entered the eating function
+5ms philo 3 is sleeping
+5ms philo 3 is thinking
+philo 3's full value is 0
+entered the eating function
+5ms philo 3 is sleeping
+5ms philo 3 is thinking
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+philo 3's full value is 0
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&

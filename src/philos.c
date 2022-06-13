@@ -62,13 +62,15 @@ void	philo_thread(t_param *param, pthread_t *philos)
 int	init_philo(t_param *param)
 {
 	int i;
-	pthread_t *philos;
+	pthread_t	*philos;
+	pthread_t	check;
 
 	philos = malloc(sizeof(pthread_t) * param->num_philo);
 	if (!philos)
 		return (-1);
 	philos_setup(param);
 	philo_thread(param, philos);
+	pthread_create(&check, NULL, checker, param);
     /*if (param->num_eat > 0)
     {
         printf("+++++++++++++++\n");

@@ -78,6 +78,6 @@ void    ft_putstr_fd(char *s, int fd);
 long long   timestamp(void);
 
 /* checker */
-void    checker(t_param *param);
+void    *checker(void *temp);
 
 #endif

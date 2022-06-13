@@ -12,11 +12,26 @@
 
 #include "../includes/philosophers.h"
 
-void    checker(t_param *param)
+int     check_full(t_param *param, t_philo *philo)
+{
+    // 	if (param->num_eat && param->ph[i].full == 2)
+// 	{
+// 		printf("%lldms %d full\n", actual_time() - param->ph[*k].ttinit,
+// 			param->ph[*k].id);
+// 		(*ret)++;
+// 		param->ph[*k].full = 1;
+// 	}
+}
+
+void    *checker(void *temp)
 {
     int i;
     int all_ate;
+    t_param *param;
+    t_philo *philos;
 
+    param = (t_param *)temp;
+    philos = param->philo;
     all_ate = 0; 
     while (1)
     {
@@ -29,15 +44,15 @@ void    checker(t_param *param)
             //if 
             if (param->num_eat > 0)
             {
-                if (param->philo[i].meal_count == param->num_eat)
+                if (philos[i].meal_count >= param->num_eat)
                 {
                     printf("++++++++++++++++++-------------------------+++++++++++++++++++\n");
-                    printf("for philo %d the mealcount is %d\n", param->philo[i].id, param->philo[i].meal_count);
+                    printf("for philo %d the mealcount is %d\n", philos[i].id, philos[i].meal_count);
 
                     printf("inside checker, entering to modify the value of philo->full\n");
-                    printf("modifying philo %d\n", param->philo[i].id);
-                    param->philo[i].full = 1;
-                    printf("inside checker new value of full is %d\n", param->philo[i].full);
+                    printf("modifying philo %d\n", philos[i].id);
+                    philos[i].full = 1;
+                    printf("inside checker new value of full is %d\n", philos[i].full);
                     all_ate++;
                     printf("value of all ate is %d\n", all_ate);
                     printf("++++++++++++++++++-------------------------+++++++++++++++++++\n");
@@ -45,8 +60,11 @@ void    checker(t_param *param)
             }
             if (all_ate == param->num_eat)
             {
+                printf("##########################\n");
+                printf("all_ate is %d\n", all_ate);
                 printf("all philos ate\n");
-                return ;
+                printf("##########################\n");
+                return (NULL);
             }
             /*pthread_mutex_lock(&param->meal_check);
             if (timestamp() - param->philo[i].l_meal > param->philo[i].time_todie)

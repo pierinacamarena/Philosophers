@@ -20,7 +20,7 @@ void *func(void *philo_void)
 	i = 0;
 	philo = (t_philo *)philo_void;
 	printf("philo %d's full value is %d\n", philo->id, philo->full);
-	while (philo->full != 1 && philo->dead == 0)
+	while (philo->full != 1 && philo->dead == 0 && i < 9)
 	{
 		printf("philo %d's full value is %d\n", philo->id, philo->full);
 		eat(philo);
@@ -29,7 +29,9 @@ void *func(void *philo_void)
     	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
 		i++;
 	}
+	printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 	printf("philo %d's full value is %d\n", philo->id, philo->full);
+	printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 /*	if (philo->total_eat == 0)
 	{
 		while (!philo->full && philo->dead == 0)
