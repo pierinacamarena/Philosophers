@@ -15,23 +15,22 @@
 void *func(void *philo_void)
 {
 	t_philo *philo;
-	int		i;
+	//int		i;
 
-	i = 0;
+	//i = 0;
 	philo = (t_philo *)philo_void;
-	printf("philo %d's full value is %d\n", philo->id, philo->full);
-	while (philo->full != 1 && philo->dead == 0 && i < 9)
+	while (philo->full != 1 && philo->dead == 0)
 	{
-		printf("philo %d's full value is %d\n", philo->id, philo->full);
 		eat(philo);
+		if (philo->total_eat > 0 && philo->meal_count == philo->total_eat)
+		{
+			philo->full = 2;
+		}
 		printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
   	  	usleep(philo->time_tosleep);
     	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
-		i++;
+		//i++;
 	}
-	printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
-	printf("philo %d's full value is %d\n", philo->id, philo->full);
-	printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
 /*	if (philo->total_eat == 0)
 	{
 		while (!philo->full && philo->dead == 0)
