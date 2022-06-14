@@ -9,7 +9,7 @@ void	death_checker(t_rules *r, t_philosopher *p)
 		while (++i < r->nb_philo && !(r->dieded))
 		{
 			pthread_mutex_lock(&(r->meal_check));
-			if (time_diff(p[i].t_last_meal, timestamp()) > r->time_death)
+			if (time_diff(p[i].t_last_meal, current_time()) > r->time_death)
 			{
 				action_print(r, i, "died");
 				r->dieded = 1;
@@ -45,12 +45,12 @@ void	*death_is_near(void *tmp)
 			if (all->count_of_lunch)
 				if (p->count_eat == all->count_of_lunch)
 					return (NULL);
-			if (get_timestamp() - p[i].last_eat > p[i].time_to_die)
+			if (get_current_time() - p[i].last_eat > p[i].time_to_die)
 			{
 				all->flag_of_death = 1;
 				pthread_mutex_lock(&all->print);
 				printf("%lld %d" YEL " is died"RESET"\n",
-					get_timestamp() - p->time_start, p->id);
+					get_current_time() - p->time_start, p->id);
 				return (NULL);
 			}
 		}

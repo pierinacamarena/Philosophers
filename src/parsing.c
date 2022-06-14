@@ -50,6 +50,7 @@ int arg_parsing(int ac, char **av, t_param *param)
     if (param->t_eat < 1)
         return (1);
     param->t_sleep = ft_atoi(av[4]);
+    param->all_ate = 0;
     param->forks = create_fork(param->num_philo);
     if (!param->forks)
         return (0);

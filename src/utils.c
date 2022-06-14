@@ -40,13 +40,3 @@ void	ft_putstr_fd(char *s, int fd)
 			write(fd, s++, 1);
 	}
 }
-
-long long	timestamp(void)
-{
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000LL) + (t.tv_usec / 1000));
-}
-
-//void	ft_sleep()

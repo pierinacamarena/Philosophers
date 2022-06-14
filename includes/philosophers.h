@@ -49,6 +49,7 @@ typedef struct     s_param
     int     t_eat;
     int     t_sleep;
     int     num_eat;
+    int     all_ate;
     t_fork  *forks;
     t_philo *philo;
     pthread_mutex_t	printing;
@@ -76,9 +77,13 @@ void    philos_setup(t_param *param);
 /* utils */
 int     ft_atoi(const char *str);
 void    ft_putstr_fd(char *s, int fd);
-long long   timestamp(void);
 
 /* checker */
 void    *checker(void *temp);
 
+/* time */
+long long	current_time(void);
+long long   time_differ(long long past, long long current);
+void    my_sleep(t_philo *philo, int time_sleep);
+void	ft_usleep(unsigned int n, t_philo *th);
 #endif

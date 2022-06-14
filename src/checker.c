@@ -12,38 +12,29 @@
 
 #include "../includes/philosophers.h"
 
-int     check_full(t_param *param, t_philo *philos, int *i, int *all_ate)
-{
-    if (param->num_eat && philos[*i].full == 2)
-	{
-		printf("%lldms philo %d full\n", timestamp() - philos[*i].time_init,
-			philos[*i].id);
-		(*all_ate)++;
-		philos[*i].full = 1;
-	}
-    return (0);
-}
-
 void    *checker(void *temp)
 {
     int i;
-    int all_ate;
     t_param *param;
     t_philo *philos;
 
     param = (t_param *)temp;
     philos = param->philo;
-    all_ate = 0; 
     while (1)
     {
-        usleep(10);
+        ft_usleep(20, NULL);
         i = -1;
-        while (i++ < param->num_philo)
+        while (++i < param->num_philo)
         {
-            if (check_full(param, philos, &i, &all_ate))
-                return (NULL);
-            if (all_ate == param->num_eat)
-                return (NULL);
+            if (param->num_eat > 0 && philos[i].full == 2)
+	        {
+		        printf("%lldms philo %d full\n", current_time() - philos[i].time_init,
+			        philos[i].id);
+		        param->all_ate++;
+		        philos[i].full = 1;
+	        }
+            if (param->all_ate == param->num_eat)
+                break ;
 		}
     }
 }
