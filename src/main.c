@@ -21,38 +21,17 @@ void *func(void *philo_void)
 	philo = (t_philo *)philo_void;
 	while (philo->full != 1 && philo->dead == 0)
 	{
-		eat(philo);
+		if (philo->full > 0 || eat(philo) == 1)
+			break;
 		if (philo->total_eat > 0 && philo->meal_count == philo->total_eat)
-		{
 			philo->full = 2;
-		}
+		// if (philo->dead || philo->full > 0 || philo_sleep(philo) == 1)
+		// 	break;
 		printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
   	  	usleep(philo->time_tosleep);
     	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
 		//i++;
 	}
-/*	if (philo->total_eat == 0)
-	{
-		while (!philo->full && philo->dead == 0)
-		{
-			eat(philo);
-			printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
-	  	  	usleep(philo->time_tosleep);
-	    	printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
-			i++;
-		}
-	}
-	else if (philo->total_eat > 0)
-	{
-		while (!philo->full && philo->dead == 0 && i < philo->total_eat)
-		{
-			eat(philo);
-			printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
-    		usleep(philo->time_tosleep);
-    		printf("%lldms philo %d is thinking\n", timestamp() - philo->time_init, philo->id);
-			i++;
-		}
-	}*/
 	return (NULL);
 }
 

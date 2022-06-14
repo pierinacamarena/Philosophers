@@ -21,7 +21,7 @@ static void    greedy_philo_check(int *id_dirty, int id, pthread_mutex_t *fork)
 
 }
 
-void    eat(t_philo *philo)
+int    eat(t_philo *philo)
 {
     if (philo->id % 2 == 0)
     {
@@ -48,7 +48,18 @@ void    eat(t_philo *philo)
     philo->meal_count++;
     usleep(philo->time_toeat);
     pthread_mutex_unlock(&(philo->left_f->fork));
-    printf("%lldms philo %d has dropped a left fork\n", timestamp() - philo->time_init, philo->id);
+    //printf("%lldms philo %d has dropped a left fork\n", timestamp() - philo->time_init, philo->id);
     pthread_mutex_unlock(&(philo->right_f->fork));
-    printf("%lldms philo %d has dropped a right fork\n", timestamp() - philo->time_init, philo->id);
+    //printf("%lldms philo %d has dropped a right fork\n", timestamp() - philo->time_init, philo->id);
+    return (0);
+}
+
+int    philo_sleep(t_philo *philo)
+{
+    if (philo->dead == 0)
+    {
+        printf("%lldms philo %d is sleeping\n", timestamp() - philo->time_init, philo->id);
+        usleep(philo->time_tosleep);
+    }
+    return (0);
 }

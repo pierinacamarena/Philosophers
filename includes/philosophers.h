@@ -56,7 +56,8 @@ typedef struct     s_param
 }               t_param;
 
 /* activities */
-void    eat(t_philo *philo);
+int    eat(t_philo *philo);
+int    philo_sleep(t_philo *philo);
 
 /* error */
 void    error_arg(void);
