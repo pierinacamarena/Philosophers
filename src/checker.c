@@ -26,10 +26,10 @@ void    *checker(void *temp)
         i = -1;
         while (++i < param->num_philo)
         {
-            if (param->num_eat > 0 && philos[i].full == 2)
+            if (param->num_eat && (philos[i].full == 2))
 	        {
-		        printf("%lldms philo %d full\n", current_time() - philos[i].time_init,
-			        philos[i].id);
+		        //printf("%lldms philo %d full\n", current_time() - philos[i].time_init,
+			    //    philos[i].id);
 		        param->all_ate++;
 		        philos[i].full = 1;
 	        }

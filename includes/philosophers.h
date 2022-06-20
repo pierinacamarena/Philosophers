@@ -27,19 +27,20 @@ typedef struct  s_fork
 
 typedef struct  s_philo
 {
-    int         id;
-    long long   time_init;
-    long long   l_meal;
-    int         time_toeat;
-    int         time_tosleep;
-    int         time_todie;
-    int         total_eat;
-    int         status;
-    int         full;
-    int         meal_count;
-    int         dead;
-    t_fork      *left_f;
-    t_fork      *right_f;
+    int             id;
+    long long       time_init;
+    long long       l_meal;
+    int             time_toeat;
+    int             time_tosleep;
+    int             time_todie;
+    int             total_eat;
+    int             status;
+    int             full;
+    int             meal_count;
+    int             dead;
+    t_fork          *left_f;
+    t_fork          *right_f;
+    struct s_param  *params;
 }               t_philo;
 
 typedef struct     s_param
@@ -52,7 +53,7 @@ typedef struct     s_param
     int     all_ate;
     t_fork  *forks;
     t_philo *philo;
-    pthread_mutex_t	printing;
+    pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
 }               t_param;
 
@@ -77,6 +78,7 @@ void    philos_setup(t_param *param);
 /* utils */
 int     ft_atoi(const char *str);
 void    ft_putstr_fd(char *s, int fd);
+void	locked_print(t_philo *philo, int action);
 
 /* checker */
 void    *checker(void *temp);

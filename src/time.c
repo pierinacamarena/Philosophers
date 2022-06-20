@@ -57,7 +57,7 @@ void		ft_usleep(unsigned int n, t_philo *th)
 	{
 		if (no_null && th->status)
 			break ;
-		usleep(10);
+		usleep(100);
 		gettimeofday(&step, NULL);
 		if ((size_t)(((size_t)(step.tv_sec - start.tv_sec)) * 1000000 +
 					((size_t)(step.tv_usec - start.tv_usec))) > n)

@@ -26,24 +26,24 @@ int    eat(t_philo *philo)
     if (philo->id % 2 == 0)
     {
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork));
-	    printf("%lldms philo %d has taken a left fork\n", current_time() - philo->time_init, philo->id);
+	    locked_print(philo, 1);
     }
     else
     {
         greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork));
-        printf("%lldms philo %d has taken a right fork\n", current_time() - philo->time_init, philo->id);
+        locked_print(philo, 1);
     }
     if (philo->id % 2 == 0)
     {
         greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork));
-        printf("%lldms philo %d has taken a right fork\n", current_time() - philo->time_init, philo->id);
+        locked_print(philo, 1);
     }
     else
     {
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork));
-	    printf("%lldms philo %d has taken a left fork\n", current_time() - philo->time_init, philo->id);
+	    locked_print(philo, 1);
     }
-    printf("%lldms philo %d is eating\n", current_time() - philo->time_init, philo->id);
+    locked_print(philo, 2);
     philo->l_meal = current_time();
     philo->meal_count++;
     my_sleep(philo, philo->time_toeat);
@@ -56,7 +56,7 @@ int    philo_sleep(t_philo *philo)
 {
     if (philo->dead == 0)
     {
-        printf("%lldms philo %d is sleeping\n", current_time() - philo->time_init, philo->id);
+        locked_print(philo, 3);
         my_sleep(philo, philo->time_tosleep);
     }
     return (0);

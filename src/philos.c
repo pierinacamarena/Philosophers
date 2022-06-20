@@ -37,6 +37,7 @@ void    philos_setup(t_param *param)
             param->philo[i].right_f = &param->forks[i + 1];
         else
             param->philo[i].right_f = &param->forks[0];
+        param->philo[i].params = param;
         i++;
     }
 }
