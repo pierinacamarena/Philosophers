@@ -64,7 +64,7 @@ int	init_philo(t_param *param)
 {
 	int i;
 	pthread_t	*philos;
-	pthread_t	check;
+	// pthread_t	check;
     // pthread_t   check_death;
 
 	philos = malloc(sizeof(pthread_t) * param->num_philo);
@@ -72,7 +72,8 @@ int	init_philo(t_param *param)
 		return (-1);
 	philos_setup(param);
 	philo_thread(param, philos);
-	pthread_create(&check, NULL, checker, param);
+    check_dead_full(param);
+	// pthread_create(&check, NULL, checker, param);
 	i = 0;
     while (i < param->num_philo)
     {

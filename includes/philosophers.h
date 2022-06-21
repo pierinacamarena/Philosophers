@@ -81,7 +81,8 @@ void    ft_putstr_fd(char *s, int fd);
 void	locked_print(t_philo *philo, int action);
 
 /* checker */
-void    *checker(void *temp);
+// void    *checker(void *temp);
+void    check_dead_full(t_param *param);
 
 /* time */
 long long	current_time(void);
