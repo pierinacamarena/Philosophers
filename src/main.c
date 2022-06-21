@@ -17,7 +17,7 @@ void *func(void *philo_void)
 	t_philo *philo;
 
 	philo = (t_philo *)philo_void;
-	while (philo->dead != 1 && philo->full != 1)
+	while (philo->dead != 1 || philo->full != 1)
 	{
 		if (philo->full > 0 || eat(philo) == 1)
 			break;
@@ -25,7 +25,8 @@ void *func(void *philo_void)
 			philo->full = 2;
 		if (philo->dead || philo->full > 0 || philo_sleep(philo) == 1)
 			break;
-    	locked_print(philo, 4);
+		if (philo->dead != 1)
+    		locked_print(philo, 4);
 
 	}
 	return (NULL);

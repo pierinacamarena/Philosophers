@@ -41,7 +41,7 @@ static  t_fork  *create_fork(int n)
 int arg_parsing(int ac, char **av, t_param *param)
 {
     param->num_philo = ft_atoi(av[1]);
-    if (param->num_philo < 2)
+    if (param->num_philo < 1)
         return (1);
     param->t_die = ft_atoi(av[2]);
     if (param->t_die < 1)
@@ -51,6 +51,7 @@ int arg_parsing(int ac, char **av, t_param *param)
         return (1);
     param->t_sleep = ft_atoi(av[4]);
     param->all_ate = 0;
+    // param->philo_died = 0;
     param->forks = create_fork(param->num_philo);
     if (!param->forks)
         return (0);
