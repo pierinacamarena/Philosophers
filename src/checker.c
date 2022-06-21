@@ -12,33 +12,6 @@
 
 #include "../includes/philosophers.h"
 
-// void    *checker(void *temp)
-// {
-//     int i;
-//     t_param *param;
-//     t_philo *philos;
-
-//     param = (t_param *)temp;
-//     philos = param->philo;
-//     while (1)
-//     {
-//         ft_usleep(20, NULL);
-//         i = -1;
-//         while (++i < param->num_philo)
-//         {
-//             if (param->num_eat && (philos[i].full == 2))
-// 	        {
-// 		        //printf("%lldms philo %d full\n", current_time() - philos[i].time_init,
-// 			    //    philos[i].id);
-// 		        param->all_ate++;
-// 		        philos[i].full = 1;
-// 	        }
-//             if (param->all_ate == param->num_eat)
-//                 break ;
-// 		}
-//     }
-// }
-
 void    check_dead_full(t_param *param)
 {
     int i;
@@ -58,7 +31,7 @@ void    check_dead_full(t_param *param)
 	        }
             if (param->all_ate == param->num_philo)
             {
-                printf("all philo are full\n");
+                printf("%lld all philo are full\n", current_time() - param->philo->time_init);
                 return;
             }
 		}
