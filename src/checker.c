@@ -15,20 +15,31 @@
 void    check_dead_full(t_param *param)
 {
     int i;
-    t_philo *philos;
+    // t_philo *philos;
 
-    philos = param->philo;
+    // philos = param->philo;
     while (1)
     {
         ft_usleep(20, NULL);
         i = -1;
         while (++i < param->num_philo)
         {
-            if (param->num_eat && (philos[i].full == 2))
-	        {
-		        param->all_ate++;
-		        philos[i].full = 1;
-	        }
+            if (param->num_eat && (param->philo[i].full == 2))
+            {
+	            param->all_ate++;
+	            param->philo[i].full = 1;
+            }
+	        // if (current_time() > param->philo[i].l_meal + param->philo[i].time_todie)
+		    //     param->philo[i].dead = 1;
+	        // if (param->philo[i].full != 1 && param->philo[i].dead == 1)
+	        // {
+		    //     printf("%lld philo %d dead\n", current_time() - param->philo[i].time_init,
+			//     param->philo[i].id);
+		    //     i = -1;
+		    //     while (++(i) < param->num_philo)
+			//         param->philo[i].dead = 1;
+		    //     return ;
+	        // }
             if (param->all_ate == param->num_philo)
             {
                 printf("%lld all philo are full\n", current_time() - param->philo->time_init);
