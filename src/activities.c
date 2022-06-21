@@ -44,9 +44,10 @@ int    eat(t_philo *philo)
 	    locked_print(philo, 1);
     }
     locked_print(philo, 2);
-    philo->l_meal = current_time();
+    // philo->l_meal = current_time();
     philo->meal_count++;
     my_sleep(philo, philo->time_toeat);
+    philo->l_meal = current_time();
     pthread_mutex_unlock(&(philo->left_f->fork));
     pthread_mutex_unlock(&(philo->right_f->fork));
     return (0);

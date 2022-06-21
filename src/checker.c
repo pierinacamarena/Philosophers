@@ -30,7 +30,7 @@ void    check_dead_full(t_param *param)
 	            param->philo[i].full = 1;
             }
             pthread_mutex_lock(&param->meal_check);
-	        if (current_time() > param->philo[i].l_meal + param->philo[i].time_todie)
+	        if (current_time() - param->philo[i].l_meal > param->t_die)
             {
 		        param->philo[i].dead = 1;
                 printf("%lld philo %d dead\n", current_time() - param->philo[i].time_init,
