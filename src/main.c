@@ -19,15 +19,19 @@ void *func(void *philo_void)
 	philo = (t_philo *)philo_void;
 	while (philo->dead != 1 || philo->full != 1)
 	{
+		//printf("philo %d it reaches here 1\n", philo->id);
 		if (philo->full > 0 || eat(philo) == 1)
 			break;
+		//printf("philo %d it reaches here 2\n", philo->id);
 		if (philo->meal_count == philo->total_eat)
 			philo->full = 2;
+		//printf("philo %d it reaches here 2\n", philo->id);
 		if (philo->dead || philo->full > 0 || philo_sleep(philo) == 1)
 			break;
+		//printf("philo %d it reaches here 4\n", philo->id);
 		if (philo->dead != 1)
     		locked_print(philo, 4);
-
+		//printf("philo %d it reaches here 5\n", philo->id);
 	}
 	return (NULL);
 }

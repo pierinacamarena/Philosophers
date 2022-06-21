@@ -21,6 +21,7 @@ void    check_dead_full(t_param *param)
     while (1)
     {
         ft_usleep(20, NULL);
+        //printf("INSIDE CHECKER forever while\n");
         i = -1;
         while (++i < param->num_philo)
         {
@@ -33,10 +34,10 @@ void    check_dead_full(t_param *param)
 	        if (current_time() - param->philo[i].l_meal > param->t_die)
             {
 		        param->philo[i].dead = 1;
-                printf("%lld philo %d dead\n", current_time() - param->philo[i].time_init,
+                printf("%lld %d died\n", current_time() - param->philo[i].time_init,
 			    param->philo[i].id);
             }
-	        if (param->philo[i].dead == 1)
+	        if (param->philo[i].dead == 1 && param->philo[i].full != 1)
 	        {
 		        i = -1;
 		        while (++(i) < param->num_philo)

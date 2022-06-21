@@ -47,13 +47,13 @@ void	locked_print(t_philo *philo, int action)
 	if (philo->dead != 1)
 	{
 	if (action == 1)
-	    printf("%lld philo %d has taken a fork\n", current_time() - philo->time_init, philo->id);
+	    printf("%lld %d has taken a fork\n", current_time() - philo->time_init, philo->id);
 	else if (action == 2)
-	    printf("%lld philo %d is eating\n", current_time() - philo->time_init, philo->id);
+	    printf("%lld %d is eating\n", current_time() - philo->time_init, philo->id);
 	else if (action == 3)
-	    printf("%lld philo %d is sleeping\n", current_time() - philo->time_init, philo->id);
+	    printf("%lld %d is sleeping\n", current_time() - philo->time_init, philo->id);
 	else if (action == 4)
-	    printf("%lld philo %d is thinking\n", current_time() - philo->time_init, philo->id);
+	    printf("%lld %d is thinking\n", current_time() - philo->time_init, philo->id);
 	}
 	pthread_mutex_unlock(&(philo->params->printer));
 }

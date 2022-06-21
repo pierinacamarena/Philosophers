@@ -27,6 +27,7 @@ typedef struct  s_fork
 
 typedef struct  s_philo
 {
+    int             total_philo;
     int             id;
     long long       time_init;
     long long       l_meal;

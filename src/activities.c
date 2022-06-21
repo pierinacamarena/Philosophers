@@ -41,16 +41,16 @@ int    eat(t_philo *philo)
 	    if (philo->dead != 1)
             locked_print(philo, 1);
     }
-    else
+    else if (philo->id % 2 != 0 && philo->total_philo > 1)
     {
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork));
+
 	    if (philo->dead != 1)
             locked_print(philo, 1);
     }
-    if (philo->dead != 1)
+    if (philo->dead != 1 && philo->total_philo > 1)
     {
         locked_print(philo, 2);
-        // philo->l_meal = current_time();
         philo->meal_count++;
         my_sleep(philo, philo->time_toeat);
         philo->l_meal = current_time();

@@ -23,6 +23,7 @@ void    philos_setup(t_param *param)
     while (i < param->num_philo)
     {
         param->philo[i].id = i + 1;
+        param->philo[i].total_philo = param->num_philo;
         param->philo[i].time_init = current_time();
         param->philo[i].time_toeat = param->t_eat;
         param->philo[i].time_tosleep = param->t_sleep;
@@ -70,7 +71,6 @@ int	init_philo(t_param *param)
 	if (!philos)
 		return (-1);
 	philos_setup(param);
-    printf("time to die is %d\n", param->t_die);
 	philo_thread(param, philos);
     check_dead_full(param);
 	i = 0;
