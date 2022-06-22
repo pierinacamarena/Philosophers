@@ -17,6 +17,8 @@ void *func(void *philo_void)
 	t_philo *philo;
 
 	philo = (t_philo *)philo_void;
+	if (philo->id % 2)
+		usleep(15000);
 	while (philo->dead != 1 || philo->full != 1)
 	{
 		if (philo->full > 0 || eat(philo) == 1)
