@@ -56,6 +56,8 @@ typedef struct     s_param
     t_philo *philo;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
+    pthread_mutex_t meal_update;
+    pthread_mutex_t meal_count;
 }               t_param;
 
 /* activities */

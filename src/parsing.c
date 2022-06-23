@@ -18,6 +18,10 @@ static int  mutexes_init(t_param *param)
 		return (1);
 	if (pthread_mutex_init(&(param->meal_check), NULL))
 		return (1);
+    if (pthread_mutex_init(&(param->meal_count), NULL))
+        return (1);
+    if (pthread_mutex_init(&(param->meal_update), NULL))
+        return (1);
     return (0);
 }
 static  t_fork  *create_fork(int n)

@@ -18,7 +18,6 @@ static void    greedy_philo_check(int *id_dirty, int id, pthread_mutex_t *fork)
         usleep(10);
     pthread_mutex_lock(fork);
     *id_dirty = id;
-
 }
 
 int    eat(t_philo *philo)
@@ -51,9 +50,13 @@ int    eat(t_philo *philo)
     if (philo->dead != 1 && philo->total_philo > 1)
     {
         locked_print(philo, 2);
+        pthread_mutex_lock(&(philo->params->meal_count));
         philo->meal_count++;
+        pthread_mutex_unlock(&(philo->params->meal_count));
         my_sleep(philo, philo->time_toeat);
+        pthread_mutex_lock(&(philo->params->meal_update));
         philo->l_meal = current_time();
+        pthread_mutex_unlock(&(philo->params->meal_update));
     }
     pthread_mutex_unlock(&(philo->left_f->fork));
     pthread_mutex_unlock(&(philo->right_f->fork));
