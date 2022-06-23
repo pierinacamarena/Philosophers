@@ -43,6 +43,7 @@ void	ft_putstr_fd(char *s, int fd)
 
 void	locked_print(t_philo *philo, int action)
 {
+	pthread_mutex_lock(&(philo->params->meal_check));
 	pthread_mutex_lock(&(philo->params->printer));
 	if (philo->dead != 1)
 	{
@@ -56,4 +57,5 @@ void	locked_print(t_philo *philo, int action)
 	    printf("%lld %d is thinking\n", current_time() - philo->time_init, philo->id);
 	}
 	pthread_mutex_unlock(&(philo->params->printer));
+	pthread_mutex_unlock(&(philo->params->meal_check));
 }

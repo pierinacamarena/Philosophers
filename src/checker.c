@@ -12,41 +12,45 @@
 
 #include "../includes/philosophers.h"
 
+static int  check_helper(t_param *param, int *i)
+{
+    int ret;
+
+    ret = 0;
+    if (param->num_eat && (param->philo[*i].full == 2))
+    {
+	    param->all_ate++;
+	    param->philo[*i].full = 1;
+    }
+    pthread_mutex_lock(&param->meal_check);
+	if (current_time() - param->philo[*i].l_meal > param->t_die)
+    {
+		param->philo[*i].dead = 1;
+    }
+	if (param->philo[*i].dead == 1 && param->philo[*i].full != 1)
+	{
+        printf("%lld %d died\n", current_time() - param->philo[*i].time_init,
+		param->philo[*i].id);
+		*i = -1;
+		while (++(*i) < param->num_philo)
+			param->philo[*i].dead = 1;
+        ret = 1;
+	}
+    pthread_mutex_unlock(&param->meal_check);
+    return (ret);
+}
+
 void    check_dead_full(t_param *param)
 {
     int i;
-    // t_philo *philos;
-
-    // philos = param->philo;
     while (1)
     {
         ft_usleep(20, NULL);
-        //printf("INSIDE CHECKER forever while\n");
         i = -1;
         while (++i < param->num_philo)
         {
-            if (param->num_eat && (param->philo[i].full == 2))
-            {
-	            param->all_ate++;
-	            param->philo[i].full = 1;
-            }
-            pthread_mutex_lock(&param->meal_check);
-	        if (current_time() - param->philo[i].l_meal > param->t_die)
-            {
-		        param->philo[i].dead = 1;
-                printf("%lld %d died\n", current_time() - param->philo[i].time_init,
-			    param->philo[i].id);
-            }
-	        if (param->philo[i].dead == 1 && param->philo[i].full != 1)
-	        {
-		        i = -1;
-		        while (++(i) < param->num_philo)
-			        param->philo[i].dead = 1;
+            if (check_helper(param, &i))
                 return;
-	        }
-            pthread_mutex_unlock(&param->meal_check);
-            if (param->philo[i].dead == 1)
-                return ;
             if (param->all_ate == param->num_philo)
             {
                 printf("%lld all philo are full\n", current_time() - param->philo->time_init);
