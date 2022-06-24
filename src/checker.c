@@ -34,17 +34,6 @@ static int  check_helper(t_param *param, int *i)
 		param->philo[*i].id);
         ret = 1;
     }
-	// if (param->philo[*i].dead == 1 && param->philo[*i].full != 1)
-	// {
-    //     printf("%lld %d died\n", current_time() - param->philo[*i].time_init,
-	// 	param->philo[*i].id);
-	// 	*i = -1;
-	// 	while (++(*i) < param->num_philo)
-    //     {
-    //         param->philo[*i].dead = 1;
-    //     }
-    //     ret = 1;
-	// }
     pthread_mutex_unlock(&param->meal_check);
     return (ret);
 }
