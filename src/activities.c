@@ -30,25 +30,27 @@ int    eat(t_philo *philo)
 
     param = philo->params;
     if (philo->id % 2 == 0)
-        greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), philo->params);
+        greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
     else
-        greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), philo->params);
+        greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
     if (philo->id % 2 == 0)
-        greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), philo->params);
+        greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
     else if (philo->id % 2 != 0 && philo->total_philo > 1)
-        greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), philo->params);
+        greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
     if (param->died != 1 && philo->total_philo > 1)
     {
         locked_print(philo, 1);
         locked_print(philo, 1);
         locked_print(philo, 2);
-        pthread_mutex_lock(&(philo->params->meal_count));
+        pthread_mutex_lock(&(param->meal_count));
         philo->meal_count++;
-        pthread_mutex_unlock(&(philo->params->meal_count));
+        pthread_mutex_unlock(&(param->meal_count));
         my_sleep(philo, philo->time_toeat);
-        pthread_mutex_lock(&(philo->params->meal_update));
+        pthread_mutex_lock(&(param->meal_update));
+        pthread_mutex_lock(&(param->last_meal));
         philo->l_meal = current_time();
-        pthread_mutex_unlock(&(philo->params->meal_update));
+        pthread_mutex_unlock(&(param->last_meal));
+        pthread_mutex_unlock(&(param->meal_update));
     }
     pthread_mutex_unlock(&(philo->left_f->fork));
     pthread_mutex_unlock(&(philo->right_f->fork));
