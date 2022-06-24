@@ -52,6 +52,7 @@ typedef struct     s_param
     int     t_sleep;
     int     num_eat;
     int     all_ate;
+    // int     died;
     t_fork  *forks;
     t_philo *philo;
     pthread_mutex_t	printer;

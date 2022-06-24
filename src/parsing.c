@@ -38,7 +38,7 @@ static  t_fork  *create_fork(int n)
     while (i < n)
     {
         pthread_mutex_init(&tmp[i].fork, NULL);
-        tmp[i].id_dirty = i;
+        tmp[i].id_dirty = -35;
         i++;
     }
     return (tmp);       
@@ -57,6 +57,7 @@ int arg_parsing(int ac, char **av, t_param *param)
         return (1);
     param->t_sleep = ft_atoi(av[4]);
     param->all_ate = 0;
+    // param->died = 0;
     param->forks = create_fork(param->num_philo);
     if (!param->forks)
         return (0);
