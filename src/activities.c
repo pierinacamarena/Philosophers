@@ -26,6 +26,9 @@ static void    greedy_philo_check(int *id_dirty, int id, pthread_mutex_t *fork, 
 
 int    eat(t_philo *philo)
 {
+    t_param *param;
+
+    param = philo->params;
     if (philo->id % 2 == 0)
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), philo->params);
     else
@@ -34,7 +37,7 @@ int    eat(t_philo *philo)
         greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), philo->params);
     else if (philo->id % 2 != 0 && philo->total_philo > 1)
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), philo->params);
-    if (philo->dead != 1 && philo->total_philo > 1)
+    if (param->died != 1 && philo->total_philo > 1)
     {
         locked_print(philo, 1);
         locked_print(philo, 1);
@@ -54,7 +57,10 @@ int    eat(t_philo *philo)
 
 int    philo_sleep(t_philo *philo)
 {
-    if (philo->dead == 0)
+    t_param *param;
+
+    param = philo->params;
+    if (param->died == 0)
     {
         locked_print(philo, 3);
         my_sleep(philo, philo->time_tosleep);

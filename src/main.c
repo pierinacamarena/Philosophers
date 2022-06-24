@@ -15,19 +15,21 @@
 void *func(void *philo_void)
 {
 	t_philo *philo;
+	t_param *param;
 
 	philo = (t_philo *)philo_void;
+	param = philo->params;
 	if (philo->id % 2)
 		usleep(15000);
-	while (philo->dead != 1 || philo->full != 1)
+	while (param->died != 1 || philo->full != 1)
 	{
 		if (philo->full > 0 || eat(philo) == 1)
 			break;
 		if (philo->meal_count == philo->total_eat)
 			philo->full = 2;
-		if (philo->dead || philo->full > 0 || philo_sleep(philo) == 1)
+		if (param->died || philo->full > 0 || philo_sleep(philo) == 1)
 			break;
-		if (philo->dead != 1)
+		if (param->died != 1)
     		locked_print(philo, 4);
 	}
 	return (NULL);

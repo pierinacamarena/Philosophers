@@ -43,9 +43,12 @@ void	ft_putstr_fd(char *s, int fd)
 
 void	locked_print(t_philo *philo, int action)
 {
-	pthread_mutex_lock(&(philo->params->meal_check));
-	pthread_mutex_lock(&(philo->params->printer));
-	if (philo->dead != 1)
+	t_param *param;
+
+	param = philo->params;
+	pthread_mutex_lock(&(param->meal_check));
+	pthread_mutex_lock(&(param->printer));
+	if (param->died != 1)
 	{
 	if (action == 1)
 	    printf("%lld %d has taken a fork\n", current_time() - philo->time_init, philo->id);
@@ -56,6 +59,6 @@ void	locked_print(t_philo *philo, int action)
 	else if (action == 4)
 	    printf("%lld %d is thinking\n", current_time() - philo->time_init, philo->id);
 	}
-	pthread_mutex_unlock(&(philo->params->printer));
-	pthread_mutex_unlock(&(philo->params->meal_check));
+	pthread_mutex_unlock(&(param->printer));
+	pthread_mutex_unlock(&(param->meal_check));
 }
