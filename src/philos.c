@@ -79,5 +79,8 @@ int	init_philo(t_param *param)
         pthread_join(philos[i], NULL);
 		i++;
     }
+    free(philos);
+	free(param->philo);
+	free(param->forks);
 	return (0);
 }
