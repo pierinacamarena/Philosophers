@@ -58,6 +58,7 @@ typedef struct     s_param
     pthread_mutex_t meal_check;
     pthread_mutex_t meal_update;
     pthread_mutex_t meal_count;
+    // pthread_mutex_t id_check;
 }               t_param;
 
 /* activities */
