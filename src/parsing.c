@@ -14,6 +14,8 @@
 
 static int  mutexes_init(t_param *param)
 {
+    if (pthread_mutex_init(&(param->_num_eat), NULL))
+        return (1);
     if (pthread_mutex_init(&(param->_all_ate), NULL))
         return (1);
     if (pthread_mutex_init(&(param->_full), NULL))
@@ -21,7 +23,9 @@ static int  mutexes_init(t_param *param)
     if (pthread_mutex_init(&(param->_died), NULL))
         return (1);
     if (pthread_mutex_init(&(param->check_dead), NULL))
-        return (1);    
+        return (1);
+    if (pthread_mutex_init(&(param->_check_full), NULL))
+        return (1);
     if (pthread_mutex_init(&(param->printer), NULL))
 		return (1);
 	if (pthread_mutex_init(&(param->meal_check), NULL))
@@ -33,6 +37,8 @@ static int  mutexes_init(t_param *param)
     if (pthread_mutex_init(&(param->id_check), NULL))
         return (1);
     if (pthread_mutex_init(&(param->last_meal), NULL))
+        return (1);
+    if (pthread_mutex_init(&(param->time_die), NULL))
         return (1);
     return (0);
 }

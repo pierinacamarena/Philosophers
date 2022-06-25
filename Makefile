@@ -1,7 +1,8 @@
 NAME = philo
 CC = gcc -g
 FLAGS = -Wall -Werror -Wextra
-THREADS = -pthread
+THREADS = -pthread -fsanitize=thread
+# THREADS = -pthread
 HEADER = includes
 SRC = src
 OBJ = objects

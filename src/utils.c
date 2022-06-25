@@ -48,16 +48,16 @@ void	locked_print(t_philo *philo, int action)
 	param = philo->params;
 	pthread_mutex_lock(&(param->meal_check));
 	pthread_mutex_lock(&(param->printer));
-	if (param->died != 1)
+	if (!check_death(param) && !check_full(philo))
 	{
-	if (action == 1)
-	    printf("%lld %d has taken a fork\n", current_time() - philo->time_init, philo->id);
-	else if (action == 2)
-	    printf("%lld %d is eating\n", current_time() - philo->time_init, philo->id);
-	else if (action == 3)
-	    printf("%lld %d is sleeping\n", current_time() - philo->time_init, philo->id);
-	else if (action == 4)
-	    printf("%lld %d is thinking\n", current_time() - philo->time_init, philo->id);
+		if (action == 1)
+	    	printf("%lld %d has taken a fork\n", current_time() - philo->time_init, philo->id);
+		else if (action == 2)
+	    	printf("%lld %d is eating\n", current_time() - philo->time_init, philo->id);
+		else if (action == 3)
+	    	printf("%lld %d is sleeping\n", current_time() - philo->time_init, philo->id);
+		else if (action == 4)
+	    	printf("%lld %d is thinking\n", current_time() - philo->time_init, philo->id);
 	}
 	pthread_mutex_unlock(&(param->printer));
 	pthread_mutex_unlock(&(param->meal_check));

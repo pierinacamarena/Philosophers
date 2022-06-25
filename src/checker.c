@@ -17,7 +17,7 @@ static int  check_helper(t_param *param, int *i)
     int ret;
 
     ret = 0;
-    if (param->num_eat && (param->philo[*i].full == 2))
+    if ((check_num_eat(param)) && check_full_two(param, *i))
     {
         pthread_mutex_lock(&(param->_all_ate));
 	    param->all_ate++;
@@ -26,15 +26,6 @@ static int  check_helper(t_param *param, int *i)
 	    param->philo[*i].full = 1;
         pthread_mutex_unlock(&(param->_full));
     }
-    // pthread_mutex_lock(&param->meal_check);
-	// if (current_time() - param->philo[*i].l_meal > param->t_die)
-    // {
-	// 	param->died = 1;
-    //     printf("%lld %d died\n", current_time() - param->philo[*i].time_init,
-	// 	param->philo[*i].id);
-    //     ret = 1;
-    // }
-    // pthread_mutex_unlock(&param->meal_check);
     if (check_last_meal(param, *i))
     {
         pthread_mutex_lock(&(param->_died));

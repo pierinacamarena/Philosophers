@@ -29,6 +29,10 @@ void    philos_setup(t_param *param)
         param->philo[i].time_tosleep = param->t_sleep;
         param->philo[i].time_todie = param->t_die;
         param->philo[i].l_meal = current_time();
+        if (pthread_mutex_init(&(param->philo[i]._l_meal), NULL))
+            return;
+        if (pthread_mutex_init(&(param->philo[i]._full), NULL))
+            return;
         param->philo[i].status = 0;
         param->philo[i].full = 0;
         param->philo[i].meal_count = 0;

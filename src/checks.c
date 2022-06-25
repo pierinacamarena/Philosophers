@@ -14,24 +14,68 @@
 
 int check_last_meal(t_param *param, int i)
 {
-    pthread_mutex_lock(&param->meal_check);
-    if (current_time() - param->philo[i].l_meal > param->t_die)
+    int time_die_var;
+
+    pthread_mutex_lock(&param->time_die);
+    time_die_var = param->t_die;
+    pthread_mutex_unlock(&param->time_die);
+    pthread_mutex_lock(&param->philo[i]._l_meal);
+    if (current_time() - param->philo[i].l_meal > time_die_var)
     {
-        pthread_mutex_unlock(&param->meal_check);
+        pthread_mutex_unlock(&param->philo[i]._l_meal);
         return (1);
     }
-    pthread_mutex_unlock(&param->meal_check);
+    pthread_mutex_unlock(&param->philo[i]._l_meal);
     return (0);
 }
 
 int check_death(t_param *param)
 {
-    pthread_mutex_lock(&param->check_dead);
-    if (param->died)
+    pthread_mutex_lock(&param->_died);
+    if (param->died == 1)
     {
-        pthread_mutex_unlock(&param->check_dead);
+        pthread_mutex_unlock(&param->_died);
         return (1);
     }
-    pthread_mutex_unlock(&param->check_dead);
+    pthread_mutex_unlock(&param->_died);
+    return (0);
+}
+
+int check_full(t_philo *philo)
+{
+    t_param *param;
+
+    param = philo->params;
+    pthread_mutex_lock(&param->_check_full);
+    if (philo->full == 1)
+    {
+        pthread_mutex_unlock(&param->_check_full);
+        return (1);
+    }
+    pthread_mutex_unlock(&param->_check_full);
+    return (0);
+}
+
+int check_full_two(t_param *param, int i)
+{
+    pthread_mutex_lock(&param->philo[i]._full);
+    if (param->philo[i].full == 2)
+    {
+        pthread_mutex_unlock(&param->philo[i]._full);
+        return (1);
+    }
+    pthread_mutex_unlock(&param->philo[i]._full);
+    return (0);
+}
+
+int check_num_eat(t_param *param)
+{
+    pthread_mutex_lock(&param->_num_eat);
+    if (param->num_eat > 0)
+    {
+        pthread_mutex_unlock(&param->_num_eat);
+        return (1);
+    }
+    pthread_mutex_unlock(&param->_num_eat);
     return (0);
 }

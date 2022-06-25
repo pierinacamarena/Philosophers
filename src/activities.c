@@ -37,7 +37,7 @@ int    eat(t_philo *philo)
         greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
     else if (philo->id % 2 != 0 && philo->total_philo > 1)
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
-    if (param->died != 1 && philo->total_philo > 1)
+    if (!check_death(param) && philo->total_philo > 1)
     {
         locked_print(philo, 1);
         locked_print(philo, 1);
@@ -45,10 +45,10 @@ int    eat(t_philo *philo)
         pthread_mutex_lock(&(param->meal_count));
         philo->meal_count++;
         pthread_mutex_unlock(&(param->meal_count));
-        my_sleep(philo, philo->time_toeat);
-        pthread_mutex_lock(&(param->last_meal));
+        pthread_mutex_lock(&(philo->_l_meal));
         philo->l_meal = current_time();
-        pthread_mutex_unlock(&(param->last_meal));
+        pthread_mutex_unlock(&(philo->_l_meal));
+        my_sleep(philo, philo->time_toeat);
     }
     pthread_mutex_unlock(&(philo->left_f->fork));
     pthread_mutex_unlock(&(philo->right_f->fork));
@@ -60,7 +60,7 @@ int    philo_sleep(t_philo *philo)
     t_param *param;
 
     param = philo->params;
-    if (param->died == 0)
+    if (!check_death(param))
     {
         locked_print(philo, 3);
         my_sleep(philo, philo->time_tosleep);

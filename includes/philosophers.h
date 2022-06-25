@@ -31,12 +31,14 @@ typedef struct  s_philo
     int             id;
     long long       time_init;
     long long       l_meal;
+    pthread_mutex_t _l_meal;
     int             time_toeat;
     int             time_tosleep;
     int             time_todie;
     int             total_eat;
     int             status;
     int             full;
+    pthread_mutex_t _full;
     int             meal_count;
     int             dead;
     t_fork          *left_f;
@@ -55,10 +57,13 @@ typedef struct     s_param
     int     died;
     t_fork  *forks;
     t_philo *philo;
+    pthread_mutex_t _num_eat;
+    pthread_mutex_t time_die;
     pthread_mutex_t _all_ate;
     pthread_mutex_t _full;
     pthread_mutex_t _died;
     pthread_mutex_t check_dead;
+    pthread_mutex_t _check_full;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
     pthread_mutex_t meal_update;
@@ -103,4 +108,7 @@ void	ft_usleep(unsigned int n, t_philo *th);
 /* checks */
 int check_last_meal(t_param *param, int i);
 int check_death(t_param *param);
+int check_full(t_philo *philo);
+int check_num_eat(t_param *param);
+int check_full_two(t_param *param, int i);
 #endif

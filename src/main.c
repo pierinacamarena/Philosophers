@@ -21,13 +21,13 @@ void *func(void *philo_void)
 	param = philo->params;
 	if (philo->id % 2)
 		usleep(15000);
-	while (!check_death(param) || philo->full != 1)
+	while (!check_death(param) || !check_full(philo))
 	{
-		if (philo->full > 0 || eat(philo) == 1)
+		if (check_full(philo) || eat(philo) == 1)
 			break;
 		if (philo->meal_count == philo->total_eat)
 			philo->full = 2;
-		if (check_death(param) || philo->full > 0 || philo_sleep(philo) == 1)
+		if (check_death(param) || check_full(philo) || philo_sleep(philo) == 1)
 			break;
 		if (!check_death(param))
     		locked_print(philo, 4);
