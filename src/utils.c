@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcamaren <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 23:02:53 by pcamaren          #+#    #+#             */
-/*   Updated: 2019/11/18 23:14:55 by pcamaren         ###   ########.fr       */
+/*   Updated: 2022/06/26 01:24:27 by pcamaren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int nb;
-	int sign;
+	int	nb;
+	int	sign;
 
 	nb = 0;
 	sign = 1;
@@ -43,7 +43,7 @@ void	ft_putstr_fd(char *s, int fd)
 
 void	locked_print(t_philo *philo, int action)
 {
-	t_param *param;
+	t_param	*param;
 
 	param = philo->params;
 	pthread_mutex_lock(&(param->meal_check));
@@ -51,13 +51,17 @@ void	locked_print(t_philo *philo, int action)
 	if (!check_death(param) && !check_full(philo))
 	{
 		if (action == 1)
-	    	printf("%lld %d has taken a fork\n", current_time() - philo->time_init, philo->id);
+			printf("%lld %d has taken a fork\n", \
+			current_time() - philo->time_init, philo->id);
 		else if (action == 2)
-	    	printf("%lld %d is eating\n", current_time() - philo->time_init, philo->id);
+			printf("%lld %d is eating\n", \
+			current_time() - philo->time_init, philo->id);
 		else if (action == 3)
-	    	printf("%lld %d is sleeping\n", current_time() - philo->time_init, philo->id);
+			printf("%lld %d is sleeping\n", \
+			current_time() - philo->time_init, philo->id);
 		else if (action == 4)
-	    	printf("%lld %d is thinking\n", current_time() - philo->time_init, philo->id);
+			printf("%lld %d is thinking\n", \
+			current_time() - philo->time_init, philo->id);
 	}
 	pthread_mutex_unlock(&(param->printer));
 	pthread_mutex_unlock(&(param->meal_check));
