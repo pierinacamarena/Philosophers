@@ -23,3 +23,15 @@ int check_last_meal(t_param *param, int i)
     pthread_mutex_unlock(&param->meal_check);
     return (0);
 }
+
+int check_death(t_param *param)
+{
+    pthread_mutex_lock(&param->check_dead);
+    if (param->died)
+    {
+        pthread_mutex_unlock(&param->check_dead);
+        return (1);
+    }
+    pthread_mutex_unlock(&param->check_dead);
+    return (0);
+}

@@ -58,6 +58,7 @@ typedef struct     s_param
     pthread_mutex_t _all_ate;
     pthread_mutex_t _full;
     pthread_mutex_t _died;
+    pthread_mutex_t check_dead;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
     pthread_mutex_t meal_update;
@@ -101,4 +102,5 @@ void	ft_usleep(unsigned int n, t_philo *th);
 
 /* checks */
 int check_last_meal(t_param *param, int i);
+int check_death(t_param *param);
 #endif
