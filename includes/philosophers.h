@@ -57,6 +57,7 @@ typedef struct     s_param
     t_philo *philo;
     pthread_mutex_t _all_ate;
     pthread_mutex_t _full;
+    pthread_mutex_t _died;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
     pthread_mutex_t meal_update;
@@ -97,4 +98,7 @@ long long	current_time(void);
 long long   time_differ(long long past, long long current);
 void    my_sleep(t_philo *philo, int time_sleep);
 void	ft_usleep(unsigned int n, t_philo *th);
+
+/* checks */
+int check_last_meal(t_param *param, int i);
 #endif

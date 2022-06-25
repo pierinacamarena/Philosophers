@@ -26,15 +26,24 @@ static int  check_helper(t_param *param, int *i)
 	    param->philo[*i].full = 1;
         pthread_mutex_unlock(&(param->_full));
     }
-    pthread_mutex_lock(&param->meal_check);
-	if (current_time() - param->philo[*i].l_meal > param->t_die)
+    // pthread_mutex_lock(&param->meal_check);
+	// if (current_time() - param->philo[*i].l_meal > param->t_die)
+    // {
+	// 	param->died = 1;
+    //     printf("%lld %d died\n", current_time() - param->philo[*i].time_init,
+	// 	param->philo[*i].id);
+    //     ret = 1;
+    // }
+    // pthread_mutex_unlock(&param->meal_check);
+    if (check_last_meal(param, *i))
     {
-		param->died = 1;
+        pthread_mutex_lock(&(param->_died));
+        param->died = 1;
+        pthread_mutex_unlock(&(param->_died));
         printf("%lld %d died\n", current_time() - param->philo[*i].time_init,
 		param->philo[*i].id);
         ret = 1;
     }
-    pthread_mutex_unlock(&param->meal_check);
     return (ret);
 }
 

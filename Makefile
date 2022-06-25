@@ -12,7 +12,8 @@ SOURCES =	main.c \
 			philos.c \
 			activities.c \
 			checker.c \
-			time.c
+			time.c \
+			checks.c
 
 SRCS = $(addprefix $(SRC)/, $(SOURCES))
 OBJS = $(addprefix $(OBJ)/, $(SOURCES:.c=.o))
