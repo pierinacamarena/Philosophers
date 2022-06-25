@@ -35,17 +35,13 @@ int    eat(t_philo *philo)
         if (philo->id % 2 == 0)
             greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
         else 
-        {
             greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
-            if (philo->total_philo == 1)
-                locked_print(philo, 1);
-        }
         if (philo->id % 2 == 0)
             greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
         else if (philo->id % 2 != 0 && philo->total_philo > 1)
             greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
     }
-    else if (philo->total_philo % 2 == 1 && philo->total_philo != 1)
+    else
     {
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
         greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
