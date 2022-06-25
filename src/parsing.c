@@ -14,6 +14,10 @@
 
 static int  mutexes_init(t_param *param)
 {
+    if (pthread_mutex_init(&(param->_all_ate), NULL))
+        return (1);
+    if (pthread_mutex_init(&(param->_full), NULL))
+        return (1);
     if (pthread_mutex_init(&(param->printer), NULL))
 		return (1);
 	if (pthread_mutex_init(&(param->meal_check), NULL))

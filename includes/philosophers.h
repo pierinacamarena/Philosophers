@@ -55,6 +55,8 @@ typedef struct     s_param
     int     died;
     t_fork  *forks;
     t_philo *philo;
+    pthread_mutex_t _all_ate;
+    pthread_mutex_t _full;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
     pthread_mutex_t meal_update;

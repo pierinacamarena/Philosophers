@@ -46,11 +46,9 @@ int    eat(t_philo *philo)
         philo->meal_count++;
         pthread_mutex_unlock(&(param->meal_count));
         my_sleep(philo, philo->time_toeat);
-        pthread_mutex_lock(&(param->meal_update));
         pthread_mutex_lock(&(param->last_meal));
         philo->l_meal = current_time();
         pthread_mutex_unlock(&(param->last_meal));
-        pthread_mutex_unlock(&(param->meal_update));
     }
     pthread_mutex_unlock(&(philo->left_f->fork));
     pthread_mutex_unlock(&(philo->right_f->fork));
