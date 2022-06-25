@@ -29,14 +29,27 @@ int    eat(t_philo *philo)
     t_param *param;
 
     param = philo->params;
-    if (philo->id % 2 == 0)
+
+    if (philo->total_philo % 2 == 0 || philo->total_philo == 1)
+    {
+        if (philo->id % 2 == 0)
+            greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
+        else 
+        {
+            greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
+            if (philo->total_philo == 1)
+                locked_print(philo, 1);
+        }
+        if (philo->id % 2 == 0)
+            greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
+        else if (philo->id % 2 != 0 && philo->total_philo > 1)
+            greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
+    }
+    else if (philo->total_philo % 2 == 1 && philo->total_philo != 1)
+    {
         greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
-    else
         greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
-    if (philo->id % 2 == 0)
-        greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
-    else if (philo->id % 2 != 0 && philo->total_philo > 1)
-        greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
+    }
     if (!check_death(param) && philo->total_philo > 1)
     {
         locked_print(philo, 1);
@@ -50,7 +63,8 @@ int    eat(t_philo *philo)
         pthread_mutex_unlock(&(philo->_l_meal));
         my_sleep(philo, philo->time_toeat);
     }
-    pthread_mutex_unlock(&(philo->left_f->fork));
+    if (philo->total_philo > 1)
+        pthread_mutex_unlock(&(philo->left_f->fork));
     pthread_mutex_unlock(&(philo->right_f->fork));
     return (0);
 }

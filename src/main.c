@@ -12,6 +12,36 @@
 
 #include "../includes/philosophers.h"
 
+static void	one_philo(t_philo *philo)
+{
+	if (philo->total_philo == 1)
+	{
+		pthread_mutex_lock(&(philo->left_f->fork));
+        locked_print(philo, 1);
+		pthread_mutex_unlock(&(philo->left_f->fork));
+        my_sleep(philo, philo->params->t_die);
+		usleep(500);
+		pthread_mutex_lock(&(philo->params->_died));
+		philo->params->died = 1;
+		pthread_mutex_unlock(&(philo->params->_died));
+	}
+}
+
+// static void	philo_solo(t_philo *philo)
+// {
+// 	if (philo->param->numb == 1)
+// 	{
+// 		pthread_mutex_lock(philo->left);
+// 		writing("has taken a fork", philo);
+// 		pthread_mutex_unlock(philo->left);
+// 		wait_until(philo->param->t_die);
+// 		usleep(500);
+// 		pthread_mutex_lock(&philo->param->_is_dead);
+// 		philo->param->is_dead = 1;
+// 		pthread_mutex_unlock(&philo->param->_is_dead);
+// 	}
+// }
+
 void *func(void *philo_void)
 {
 	t_philo *philo;
@@ -19,6 +49,7 @@ void *func(void *philo_void)
 
 	philo = (t_philo *)philo_void;
 	param = philo->params;
+	one_philo(philo);
 	if (philo->id % 2)
 		usleep(15000);
 	while (!check_death(param) || !check_full(philo))
@@ -34,7 +65,6 @@ void *func(void *philo_void)
 	}
 	return (NULL);
 }
-
 
 int	main(int ac, char **av)
 {
