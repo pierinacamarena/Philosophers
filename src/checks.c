@@ -79,3 +79,20 @@ int check_num_eat(t_param *param)
     pthread_mutex_unlock(&param->_num_eat);
     return (0);
 }
+
+int check_fork_id(t_fork *fork, t_philo *philo)
+{
+    int id_philo;
+
+    pthread_mutex_lock(&philo->_id);
+    id_philo = philo->id;
+    pthread_mutex_unlock(&philo->_id);
+    pthread_mutex_lock(&fork->_id_pf);
+    if (fork->id_pf == id_philo)
+    {
+        pthread_mutex_unlock(&fork->_id_pf);
+        return (1);
+    }
+    pthread_mutex_unlock(&fork->_id_pf);
+    return (0);
+}

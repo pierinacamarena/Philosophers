@@ -54,7 +54,8 @@ static  t_fork  *create_fork(int n)
     while (i < n)
     {
         pthread_mutex_init(&tmp[i].fork, NULL);
-        tmp[i].id_dirty = -35;
+        tmp[i].id_pf = -35;
+        pthread_mutex_init(&tmp[i]._id_pf, NULL);
         i++;
     }
     return (tmp);       

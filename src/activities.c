@@ -12,16 +12,28 @@
 
 #include "../includes/philosophers.h"
 
-static void    greedy_philo_check(int *id_dirty, int id, pthread_mutex_t *fork, t_param *param)
+
+// static void    greedy_philo_check(int *id_dirty, int id, pthread_mutex_t *fork, t_fork *fork_f)
+// {
+//     pthread_mutex_lock(&(fork_f->_id_dirty));
+//     if (*id_dirty == id)
+//     {    pthread_mutex_unlock(&(fork_f->_id_dirty));
+//         usleep(10);
+//     }
+//     pthread_mutex_unlock(&(fork_f->_id_dirty));
+//     pthread_mutex_lock(fork);
+//     pthread_mutex_lock(&(fork_f->_id_dirty));
+//     *id_dirty = id;
+//     pthread_mutex_unlock(&(fork_f->_id_dirty));
+// }
+
+static  void    check_philo_fork(t_fork *fork, t_philo *philo)
 {
-    pthread_mutex_lock(&(param->meal_update));
-    if (*id_dirty == id)
-        usleep(10);
-    pthread_mutex_unlock(&(param->meal_update));
-    pthread_mutex_lock(fork);
-    pthread_mutex_lock(&(param->meal_check));
-    *id_dirty = id;
-    pthread_mutex_unlock(&(param->meal_check));
+    while (check_fork_id(fork, philo))
+    {
+        ft_usleep(2, NULL);
+    }
+    fork->id_pf = philo->id;
 }
 
 int    eat(t_philo *philo)
@@ -30,22 +42,38 @@ int    eat(t_philo *philo)
 
     param = philo->params;
 
-    if (philo->total_philo % 2 == 0 || philo->total_philo == 1)
-    {
+    // if (philo->total_philo % 2 == 0 || philo->total_philo == 1)
+    // {
         if (philo->id % 2 == 0)
-            greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
+        {
+            check_philo_fork(philo->left_f, philo);
+            // pthread_mutex_lock(&philo->left_f->fork);
+            // greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), philo->left_f);
+        }
         else 
-            greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
+        {
+            check_philo_fork(philo->right_f, philo);
+            // pthread_mutex_lock(&philo->right_f->fork);
+            // greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), philo->right_f);
+        }
         if (philo->id % 2 == 0)
-            greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
+        {
+            check_philo_fork(philo->right_f, philo);
+            // pthread_mutex_lock(&philo->right_f->fork);
+            // greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), philo->left_f);
+        }
         else if (philo->id % 2 != 0 && philo->total_philo > 1)
-            greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
-    }
-    else
-    {
-        greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
-        greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
-    }
+        {
+            check_philo_fork(philo->left_f, philo);
+            // pthread_mutex_lock(&philo->left_f->fork);
+            // greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), philo->right_f);
+        }
+    // }
+    // else
+    // {
+    //     greedy_philo_check(&philo->left_f->id_dirty, philo->id, &(philo->left_f->fork), param);
+    //     greedy_philo_check(&philo->right_f->id_dirty, philo->id, &(philo->right_f->fork), param);
+    // }
     if (!check_death(param) && philo->total_philo > 1)
     {
         locked_print(philo, 1);

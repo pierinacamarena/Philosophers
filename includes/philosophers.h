@@ -22,13 +22,15 @@
 typedef struct  s_fork
 {
     pthread_mutex_t	fork;
-    int             id_dirty;
+    int             id_pf;
+    pthread_mutex_t _id_pf;
 }               t_fork;
 
 typedef struct  s_philo
 {
     int             total_philo;
     int             id;
+    pthread_mutex_t _id;
     long long       time_init;
     long long       l_meal;
     pthread_mutex_t _l_meal;
@@ -111,4 +113,5 @@ int check_death(t_param *param);
 int check_full(t_philo *philo);
 int check_num_eat(t_param *param);
 int check_full_two(t_param *param, int i);
+int check_fork_id(t_fork *fork, t_philo *philo);
 #endif
