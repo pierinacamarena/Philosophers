@@ -43,16 +43,13 @@ int check_death(t_param *param)
 
 int check_full(t_philo *philo)
 {
-    t_param *param;
-
-    param = philo->params;
-    pthread_mutex_lock(&param->_check_full);
+    pthread_mutex_lock(&philo->_full);
     if (philo->full == 1)
     {
-        pthread_mutex_unlock(&param->_check_full);
+        pthread_mutex_unlock(&philo->_full);
         return (1);
     }
-    pthread_mutex_unlock(&param->_check_full);
+    pthread_mutex_unlock(&philo->_full);
     return (0);
 }
 

@@ -22,17 +22,19 @@ static int  check_helper(t_param *param, int *i)
         pthread_mutex_lock(&(param->_all_ate));
 	    param->all_ate++;
         pthread_mutex_unlock(&(param->_all_ate));
-        pthread_mutex_lock(&(param->_full));
+        pthread_mutex_lock(&(param->philo[*i]._full));
 	    param->philo[*i].full = 1;
-        pthread_mutex_unlock(&(param->_full));
+        pthread_mutex_unlock(&(param->philo[*i]._full));
     }
     if (check_last_meal(param, *i))
     {
         pthread_mutex_lock(&(param->_died));
         param->died = 1;
         pthread_mutex_unlock(&(param->_died));
+	    pthread_mutex_lock(&(param->printer));
         printf("%lld %d died\n", current_time() - param->philo[*i].time_init,
 		param->philo[*i].id);
+	    pthread_mutex_unlock(&(param->printer));
         ret = 1;
     }
     return (ret);

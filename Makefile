@@ -1,8 +1,8 @@
 NAME = philo
 CC = gcc -g
 FLAGS = -Wall -Wextra -Werror
-# THREADS = -pthread -fsanitize=thread
-THREADS = -pthread
+THREADS = -pthread -fsanitize=thread
+# THREADS = -pthread
 HEADER = includes
 SRC = src
 OBJ = objects
@@ -14,7 +14,8 @@ SOURCES =	main.c \
 			activities.c \
 			checker.c \
 			time.c \
-			checks.c
+			checks.c \
+			checks_philo.c 
 
 SRCS = $(addprefix $(SRC)/, $(SOURCES))
 OBJS = $(addprefix $(OBJ)/, $(SOURCES:.c=.o))

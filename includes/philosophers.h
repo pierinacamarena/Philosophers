@@ -38,10 +38,12 @@ typedef struct  s_philo
     int             time_tosleep;
     int             time_todie;
     int             total_eat;
+    pthread_mutex_t  _total_eat;
     int             status;
     int             full;
     pthread_mutex_t _full;
     int             meal_count;
+    pthread_mutex_t _meal_count;
     int             dead;
     t_fork          *left_f;
     t_fork          *right_f;
@@ -114,4 +116,7 @@ int check_full(t_philo *philo);
 int check_num_eat(t_param *param);
 int check_full_two(t_param *param, int i);
 int check_fork_id(t_fork *fork, t_philo *philo);
+
+/*checks_philo */
+int check_all_ate(t_philo *philo);
 #endif

@@ -27,21 +27,6 @@ static void	one_philo(t_philo *philo)
 	}
 }
 
-// static void	philo_solo(t_philo *philo)
-// {
-// 	if (philo->param->numb == 1)
-// 	{
-// 		pthread_mutex_lock(philo->left);
-// 		writing("has taken a fork", philo);
-// 		pthread_mutex_unlock(philo->left);
-// 		wait_until(philo->param->t_die);
-// 		usleep(500);
-// 		pthread_mutex_lock(&philo->param->_is_dead);
-// 		philo->param->is_dead = 1;
-// 		pthread_mutex_unlock(&philo->param->_is_dead);
-// 	}
-// }
-
 void *func(void *philo_void)
 {
 	t_philo *philo;
@@ -56,8 +41,12 @@ void *func(void *philo_void)
 	{
 		if (check_full(philo) || eat(philo) == 1)
 			break;
-		if (philo->meal_count == philo->total_eat)
+		if (check_all_ate(philo))
+		{
+    		pthread_mutex_lock(&philo->_full);
 			philo->full = 2;
+    		pthread_mutex_unlock(&philo->_full);
+		}
 		if (check_death(param) || check_full(philo) || philo_sleep(philo) == 1)
 			break;
 		if (!check_death(param))
