@@ -27,28 +27,28 @@ long long	time_differ(long long past, long long current)
 
 void	my_sleep(t_philo *philo, int time_sleep)
 {
-    long long	start;
-    int		philo_exist;
+	long long	start;
+	int			philo_exist;
 
-    philo_exist = 0;
-    if (philo)
-	    philo_exist = 1;
-    start = current_time();
-    while (1)
-    {
-	    if (check_death(philo->params) && philo_exist)
-		    break ;
-	    if (time_differ(start, current_time()) >= time_sleep)
-		    break;
-	    usleep(50);
-    }
+	philo_exist = 0;
+	if (philo)
+		philo_exist = 1;
+	start = current_time();
+	while (1)
+	{
+		if (check_death(philo->params) && philo_exist)
+			break ;
+		if (time_differ(start, current_time()) >= time_sleep)
+			break ;
+		usleep(50);
+	}
 }
 
 void	ft_usleep(unsigned int n, t_philo *philo)
 {
 	struct timeval	start;
 	struct timeval	step;
-	int		no_null;
+	int				no_null;
 
 	no_null = 0;
 	if (philo)
@@ -60,7 +60,8 @@ void	ft_usleep(unsigned int n, t_philo *philo)
 			break ;
 		usleep(100);
 		gettimeofday(&step, NULL);
-		if ((size_t)(((size_t)(step.tv_sec - start.tv_sec)) * 1000000 + ((size_t)(step.tv_usec - start.tv_usec))) > n)
+		if ((size_t)(((size_t)(step.tv_sec - start.tv_sec)) \
+		* 1000000 + ((size_t)(step.tv_usec - start.tv_usec))) > n)
 			break ;
 	}
 }
