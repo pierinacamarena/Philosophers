@@ -12,6 +12,31 @@
 
 #include "../includes/philosophers.h"
 
+static void	philo_mutex(t_param *param)
+{
+	int		i;
+
+	i = 0;
+	while (i < param->num_philo)
+	{
+		param->philo[i].time_init = current_time();
+		param->philo[i].time_toeat = param->t_eat;
+		param->philo[i].time_tosleep = param->t_sleep;
+		param->philo[i].time_todie = param->t_die;
+		if (pthread_mutex_init(&param->philo[i]._l_meal, NULL))
+			return ;
+		if (pthread_mutex_init(&param->philo[i]._full, NULL))
+			return ;
+		if (pthread_mutex_init(&param->philo[i]._id, NULL))
+			return ;
+		if (pthread_mutex_init(&param->philo[i]._meal_count, NULL))
+			return ;
+		if (pthread_mutex_init(&param->philo[i]._total_eat, NULL))
+			return ;
+		i++;
+	}
+}
+
 void	philos_setup(t_param *param)
 {
 	int	i;
@@ -24,21 +49,7 @@ void	philos_setup(t_param *param)
 	{
 		param->philo[i].id = i + 1;
 		param->philo[i].total_philo = param->num_philo;
-		param->philo[i].time_init = current_time();
-		param->philo[i].time_toeat = param->t_eat;
-		param->philo[i].time_tosleep = param->t_sleep;
-		param->philo[i].time_todie = param->t_die;
 		param->philo[i].l_meal = current_time();
-		if (pthread_mutex_init(&param->philo[i]._l_meal, NULL))
-			return ;
-		if (pthread_mutex_init(&param->philo[i]._full, NULL))
-			return ;
-		if (pthread_mutex_init(&param->philo[i]._id, NULL))
-			return ;
-		if (pthread_mutex_init(&param->philo[i]._meal_count, NULL))
-			return ;
-		if (pthread_mutex_init(&param->philo[i]._total_eat, NULL))
-			return ;
 		param->philo[i].full = 0;
 		param->philo[i].meal_count = 0;
 		param->philo[i].total_eat = param->num_eat;
@@ -50,6 +61,7 @@ void	philos_setup(t_param *param)
 		param->philo[i].params = param;
 		i++;
 	}
+	philo_mutex(param);
 }
 
 void	philo_thread(t_param *param, pthread_t *philos)
