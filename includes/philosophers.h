@@ -62,13 +62,9 @@ typedef struct     s_param
     pthread_mutex_t _num_eat;
     pthread_mutex_t time_die;
     pthread_mutex_t _all_ate;
-    pthread_mutex_t _full;
     pthread_mutex_t _died;
-    pthread_mutex_t check_dead;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
-    pthread_mutex_t meal_update;
-    pthread_mutex_t id_check;
 }               t_param;
 
 /* activities */

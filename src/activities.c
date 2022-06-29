@@ -12,59 +12,64 @@
 
 #include "../includes/philosophers.h"
 
-static  void    check_philo_fork(t_fork *fork, t_philo *philo)
+static void	check_philo_fork(t_fork *fork, t_philo *philo)
 {
-    while (check_fork_id(fork, philo))
-    {
-        ft_usleep(2, NULL);
-    }
-    pthread_mutex_lock(&fork->_id_pf);
-    pthread_mutex_lock(&fork->fork);
-    fork->id_pf = philo->id;
-    pthread_mutex_unlock(&fork->_id_pf);
+	while (check_fork_id(fork, philo))
+	{
+		ft_usleep(2, NULL);
+	}
+	pthread_mutex_lock(&fork->_id_pf);
+	pthread_mutex_lock(&fork->fork);
+	fork->id_pf = philo->id;
+	pthread_mutex_unlock(&fork->_id_pf);
 }
 
-int    eat(t_philo *philo)
+static void	eat_lock(t_philo *philo)
 {
-    t_param *param;
-
-    param = philo->params;
-    if (philo->id % 2 == 0)
-        check_philo_fork(philo->left_f, philo);
-    else 
-        check_philo_fork(philo->right_f, philo);
-    if (philo->id % 2 == 0)
-        check_philo_fork(philo->right_f, philo);
-    else if (philo->id % 2 != 0 && philo->total_philo > 1)
-        check_philo_fork(philo->left_f, philo);
-    if (!check_death(param) && philo->total_philo > 1)
-    {
-        locked_print(philo, 1);
-        locked_print(philo, 1);
-        locked_print(philo, 2);
-        pthread_mutex_lock(&(philo->_meal_count));
-        philo->meal_count++;
-        pthread_mutex_unlock(&(philo->_meal_count));
-        pthread_mutex_lock(&(philo->_l_meal));
-        philo->l_meal = current_time();
-        pthread_mutex_unlock(&(philo->_l_meal));
-        my_sleep(philo, philo->time_toeat);
-    }
-    if (philo->total_philo > 1)
-        pthread_mutex_unlock(&(philo->left_f->fork));
-    pthread_mutex_unlock(&(philo->right_f->fork));
-    return (0);
+	if (philo->id % 2 == 0)
+		check_philo_fork(philo->left_f, philo);
+	else
+		check_philo_fork(philo->right_f, philo);
+	if (philo->id % 2 == 0)
+		check_philo_fork(philo->right_f, philo);
+	else if (philo->id % 2 != 0 && philo->total_philo > 1)
+		check_philo_fork(philo->left_f, philo);
 }
 
-int    philo_sleep(t_philo *philo)
+int	eat(t_philo *philo)
 {
-    t_param *param;
+	t_param	*param;
 
-    param = philo->params;
-    if (!check_death(param))
-    {
-        locked_print(philo, 3);
-        my_sleep(philo, philo->time_tosleep);
-    }
-    return (0);
+	param = philo->params;
+	eat_lock(philo);
+	if (!check_death(param) && philo->total_philo > 1)
+	{
+		locked_print(philo, 1);
+		locked_print(philo, 1);
+		locked_print(philo, 2);
+		pthread_mutex_lock(&(philo->_meal_count));
+		philo->meal_count++;
+		pthread_mutex_unlock(&(philo->_meal_count));
+		pthread_mutex_lock(&(philo->_l_meal));
+		philo->l_meal = current_time();
+		pthread_mutex_unlock(&(philo->_l_meal));
+		my_sleep(philo, philo->time_toeat);
+	}
+	if (philo->total_philo > 1)
+		pthread_mutex_unlock(&(philo->left_f->fork));
+	pthread_mutex_unlock(&(philo->right_f->fork));
+	return (0);
+}
+
+int	philo_sleep(t_philo *philo)
+{
+	t_param	*param;
+
+	param = philo->params;
+	if (!check_death(param))
+	{
+		locked_print(philo, 3);
+		my_sleep(philo, philo->time_tosleep);
+	}
+	return (0);
 }
