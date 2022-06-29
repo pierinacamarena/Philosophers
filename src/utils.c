@@ -66,8 +66,3 @@ void	locked_print(t_philo *philo, int action)
 	pthread_mutex_unlock(&(param->printer));
 	pthread_mutex_unlock(&(param->meal_check));
 }
-
-// void	locked_print_dead(t_philo philo)
-// {
-
-// }

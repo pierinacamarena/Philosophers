@@ -42,9 +42,9 @@ int    eat(t_philo *philo)
         locked_print(philo, 1);
         locked_print(philo, 1);
         locked_print(philo, 2);
-        pthread_mutex_lock(&(param->meal_count));
+        pthread_mutex_lock(&(philo->_meal_count));
         philo->meal_count++;
-        pthread_mutex_unlock(&(param->meal_count));
+        pthread_mutex_unlock(&(philo->_meal_count));
         pthread_mutex_lock(&(philo->_l_meal));
         philo->l_meal = current_time();
         pthread_mutex_unlock(&(philo->_l_meal));

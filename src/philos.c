@@ -39,10 +39,8 @@ void    philos_setup(t_param *param)
             return;
         if (pthread_mutex_init(&param->philo[i]._total_eat, NULL))
             return;
-        param->philo[i].status = 0;
         param->philo[i].full = 0;
         param->philo[i].meal_count = 0;
-        param->philo[i].dead = 0;
         param->philo[i].total_eat = param->num_eat;
         param->philo[i].left_f = &param->forks[i];
         if (i < param->num_philo - 1)

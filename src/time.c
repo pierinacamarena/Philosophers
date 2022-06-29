@@ -36,7 +36,7 @@ void	my_sleep(t_philo *philo, int time_sleep)
     start = current_time();
     while (1)
     {
-	    if (philo->dead && philo_exist)
+	    if (check_death(philo->params) && philo_exist)
 		    break ;
 	    if (time_differ(start, current_time()) >= time_sleep)
 		    break;
@@ -44,19 +44,19 @@ void	my_sleep(t_philo *philo, int time_sleep)
     }
 }
 
-void	ft_usleep(unsigned int n, t_philo *th)
+void	ft_usleep(unsigned int n, t_philo *philo)
 {
 	struct timeval	start;
 	struct timeval	step;
 	int		no_null;
 
 	no_null = 0;
-	if (th)
+	if (philo)
 		no_null = 1;
 	gettimeofday(&start, NULL);
 	while (1)
 	{
-		if (no_null && th->status)
+		if (no_null && check_death(philo->params))
 			break ;
 		usleep(100);
 		gettimeofday(&step, NULL);

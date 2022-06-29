@@ -24,19 +24,13 @@ static int  mutexes_init(t_param *param)
         return (1);
     if (pthread_mutex_init(&(param->check_dead), NULL))
         return (1);
-    if (pthread_mutex_init(&(param->_check_full), NULL))
-        return (1);
     if (pthread_mutex_init(&(param->printer), NULL))
 		return (1);
 	if (pthread_mutex_init(&(param->meal_check), NULL))
 		return (1);
-    if (pthread_mutex_init(&(param->meal_count), NULL))
-        return (1);
     if (pthread_mutex_init(&(param->meal_update), NULL))
         return (1);
     if (pthread_mutex_init(&(param->id_check), NULL))
-        return (1);
-    if (pthread_mutex_init(&(param->last_meal), NULL))
         return (1);
     if (pthread_mutex_init(&(param->time_die), NULL))
         return (1);

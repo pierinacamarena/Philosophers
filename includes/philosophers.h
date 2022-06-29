@@ -39,12 +39,10 @@ typedef struct  s_philo
     int             time_todie;
     int             total_eat;
     pthread_mutex_t  _total_eat;
-    int             status;
     int             full;
     pthread_mutex_t _full;
     int             meal_count;
     pthread_mutex_t _meal_count;
-    int             dead;
     t_fork          *left_f;
     t_fork          *right_f;
     struct s_param  *params;
@@ -67,13 +65,10 @@ typedef struct     s_param
     pthread_mutex_t _full;
     pthread_mutex_t _died;
     pthread_mutex_t check_dead;
-    pthread_mutex_t _check_full;
     pthread_mutex_t	printer;
     pthread_mutex_t meal_check;
     pthread_mutex_t meal_update;
-    pthread_mutex_t meal_count;
     pthread_mutex_t id_check;
-    pthread_mutex_t last_meal;
 }               t_param;
 
 /* activities */
