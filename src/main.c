@@ -17,9 +17,9 @@ static void	one_philo(t_philo *philo)
 	if (philo->total_philo == 1)
 	{
 		pthread_mutex_lock(&(philo->left_f->fork));
-        locked_print(philo, 1);
+		locked_print(philo, 1);
 		pthread_mutex_unlock(&(philo->left_f->fork));
-        my_sleep(philo, philo->params->t_die);
+		my_sleep(philo, philo->params->t_die);
 		usleep(500);
 		pthread_mutex_lock(&(philo->params->_died));
 		philo->params->died = 1;
@@ -27,10 +27,10 @@ static void	one_philo(t_philo *philo)
 	}
 }
 
-void *func(void *philo_void)
+void	*func(void *philo_void)
 {
-	t_philo *philo;
-	t_param *param;
+	t_philo	*philo;
+	t_param	*param;
 
 	philo = (t_philo *)philo_void;
 	param = philo->params;
@@ -40,25 +40,25 @@ void *func(void *philo_void)
 	while (!check_death(param) || !check_full(philo))
 	{
 		if (check_full(philo) || eat(philo) == 1)
-			break;
+			break ;
 		if (check_all_ate(philo))
 		{
-    		pthread_mutex_lock(&philo->_full);
+			pthread_mutex_lock(&philo->_full);
 			philo->full = 2;
-    		pthread_mutex_unlock(&philo->_full);
+			pthread_mutex_unlock(&philo->_full);
 		}
 		if (check_death(param) || check_full(philo) || philo_sleep(philo) == 1)
-			break;
+			break ;
 		if (!check_death(param))
-    		locked_print(philo, 4);
+			locked_print(philo, 4);
 	}
 	return (NULL);
 }
 
 int	main(int ac, char **av)
 {
-	int	error;
-	t_param param;
+	int		error;
+	t_param	param;
 
 	if (ac < 5 || ac > 6)
 	{

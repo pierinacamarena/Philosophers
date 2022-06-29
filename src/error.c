@@ -20,8 +20,7 @@ void	error_arg(void)
     [number_of_times_each_philosophers_must_eat]\n", 1);
 }
 
-
-void 	error_parsing(void)
+void	error_parsing(void)
 {
 	ft_putstr_fd("Wrong value of arguments\n./philosophers ", 1);
 	ft_putstr_fd("[number_of_philosophers > 1] [time_to_die > 1]\
