@@ -106,7 +106,6 @@ static void	destroy_mutexes(t_param *param)
 		pthread_mutex_destroy(&(param->philo[i]._total_eat));
 		pthread_mutex_destroy(&(param->philo[i]._full));
 		pthread_mutex_destroy(&(param->philo[i]._meal_count));
-
 	}
 }
 
