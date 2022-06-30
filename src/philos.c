@@ -92,13 +92,13 @@ static void	destroy_mutexes(t_param *param)
 		pthread_mutex_destroy(&(param->forks[i].fork));
 		pthread_mutex_destroy(&(param->forks[i]._id_pf));
 	}
-		pthread_mutex_destroy(&(param->_num_eat));
-		pthread_mutex_destroy(&(param->time_die));
-		pthread_mutex_destroy(&(param->_all_ate));
-		pthread_mutex_destroy(&(param->_died));
-		pthread_mutex_destroy(&(param->printer));
-		pthread_mutex_destroy(&(param->meal_check));
-		i = -1;
+	pthread_mutex_destroy(&(param->_num_eat));
+	pthread_mutex_destroy(&(param->time_die));
+	pthread_mutex_destroy(&(param->_all_ate));
+	pthread_mutex_destroy(&(param->_died));
+	pthread_mutex_destroy(&(param->printer));
+	pthread_mutex_destroy(&(param->meal_check));
+	i = -1;
 	while (++i < param->num_philo)
 	{
 		pthread_mutex_destroy(&(param->philo[i]._id));
