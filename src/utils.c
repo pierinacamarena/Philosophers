@@ -12,6 +12,20 @@
 
 #include "../includes/philosophers.h"
 
+static int	is_not_valid(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	nb;
@@ -27,6 +41,8 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
+	if (is_not_valid(str))
+		return (0);
 	while (*str >= '0' && *str <= '9')
 		nb = (nb * 10) + ((*str++) - '0');
 	return (nb * sign);
