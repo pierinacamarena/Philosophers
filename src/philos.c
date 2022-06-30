@@ -82,6 +82,34 @@ void	philo_thread(t_param *param, pthread_t *philos)
 	}
 }
 
+static void	destroy_mutexes(t_param *param)
+{
+	int	i;
+
+	i = -1;
+	while (++i < param->num_philo)
+	{
+		pthread_mutex_destroy(&(param->forks[i].fork));
+		pthread_mutex_destroy(&(param->forks[i]._id_pf));
+		pthread_mutex_destroy(&(param->_num_eat));
+		pthread_mutex_destroy(&(param->time_die));
+		pthread_mutex_destroy(&(param->_all_ate));
+		pthread_mutex_destroy(&(param->_died));
+		pthread_mutex_destroy(&(param->printer));
+		pthread_mutex_destroy(&(param->meal_check));
+	}
+		i = -1;
+	while (++i < param->num_philo)
+	{
+		pthread_mutex_destroy(&(param->philo[i]._id));
+		pthread_mutex_destroy(&(param->philo[i]._l_meal));
+		pthread_mutex_destroy(&(param->philo[i]._total_eat));
+		pthread_mutex_destroy(&(param->philo[i]._full));
+		pthread_mutex_destroy(&(param->philo[i]._meal_count));
+
+	}
+}
+
 int	init_philo(t_param *param)
 {
 	int			i;
@@ -99,6 +127,7 @@ int	init_philo(t_param *param)
 		pthread_join(philos[i], NULL);
 		i++;
 	}
+	destroy_mutexes(param);
 	free(philos);
 	free(param->philo);
 	free(param->forks);

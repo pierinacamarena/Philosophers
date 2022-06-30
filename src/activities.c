@@ -36,7 +36,7 @@ static void	eat_lock(t_philo *philo)
 		check_philo_fork(philo->left_f, philo);
 }
 
-int	eat(t_philo *philo)
+int         eat(t_philo *philo)
 {
 	t_param	*param;
 
